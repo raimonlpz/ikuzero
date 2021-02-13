@@ -1,0 +1,90 @@
+.link {
+  display: block;
+  margin: 12px 0;
+}
+
+.search {
+  cursor: pointer;
+  margin: 1rem;
+  box-shadow: 5px 2px 5px 1px rgba(0, 0, 0, 0.2);
+}
+
+.scroll {
+  height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.action {
+  flex: 1;
+  align-items: center;
+}
+
+.crypto-name {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+tui-avatar {
+  margin-top: .8rem;
+  margin-right: 1.5rem;
+}
+
+:host {
+  display: block;
+}
+
+.hint {
+  font: var(--tui-font-text-s);
+}
+
+
+.current_price {
+  font-size: 1.2rem;
+}
+
+.date_high_low {
+  font-size: .65rem;
+}
+
+.select-currency {
+  margin: 1rem;
+}
+
+.search {
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(236, 205, 93, 0.4);
+  animation: pulse 2s infinite;
+}
+.search:hover {
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(212, 184, 79, 0.4);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+      box-shadow: 0 0 0 10px rgba(204,169,44, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+      box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}

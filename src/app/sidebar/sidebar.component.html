@@ -1,0 +1,145 @@
+<tui-marker-icon
+  class="tui-space_right-2 search"
+  mode="dark"
+  (click)="toggle(true)"
+  (tuiActiveZoneChange)="toggle($event)"
+  src="tuiIconChartLineLarge"
+>
+  <div *tuiSidebar="open; direction: 'left'">
+    <tui-scrollbar class="scroll" >
+
+      <tui-select #select class="b-form select-currency" [(ngModel)]="value">
+        Select VS currency
+        <tui-data-list *tuiDataList>
+            <tui-opt-group label="Cryptocurrencies" >
+                <button *ngFor="let c of cryptocurrencies" tuiOption [value]="c.id" (click)="onSelect()">
+                    <span style="color:#526ed3;">{{c.id}}</span> <span style="font-size:.75rem;">{{c.name}}</span>
+                </button>
+            </tui-opt-group>
+            <tui-opt-group label="Bitcoin Units">
+              <button *ngFor="let b of bitcoinUnits" tuiOption [value]="b.id" (click)="onSelect()">
+                <span style="color:#526ed3;">{{b.id}}</span> <span style="font-size:.75rem;">{{b.name}}</span>
+              </button>
+            </tui-opt-group>
+            <tui-opt-group label="Suggested Currencies">
+              <button *ngFor="let s of suggestedCurrencies" tuiOption [value]="s.id" (click)="onSelect()">
+                <span style="color:#526ed3;">{{s.id}}</span> <span style="font-size:.75rem;">{{s.name}}</span>
+              </button>
+            </tui-opt-group>
+            <tui-opt-group label="Fiat Currencies">
+              <button *ngFor="let f of fiatCurrencies" tuiOption [value]="f.id" (click)="onSelect()">
+                <span style="color:#526ed3;">{{f.id}}</span> <span style="font-size:.75rem;">{{f.name}}</span>
+              </button>
+            </tui-opt-group>
+            <tui-opt-group label="Commodities">
+              <button *ngFor="let cc of commodities" tuiOption [value]="cc.id" (click)="onSelect()">
+                <span style="color:#526ed3;">{{cc.id}}</span> <span style="font-size:.75rem;">{{cc.name}}</span>
+              </button>
+            </tui-opt-group>
+        </tui-data-list>
+      </tui-select>
+
+      <!-- <tui-loader [overlay]="true" [showLoader]="loading"> -->
+      <tui-accordion [rounded]="false">
+          <tui-accordion-item borders="top-bottom" *ngFor="let r of res" [size]="'s'">
+            <div class="crypto-name">
+                <tui-avatar
+                    class="tui-space_top-1"
+                    [avatarUrl]="r.image"
+                    size="s"
+                    [rounded]="true"
+                ></tui-avatar>
+                <p>{{r.name}}</p>
+              </div>
+
+              <ng-template tuiAccordionItemContent>
+                <div style="display: flex; justify-content: space-evenly; margin-bottom:.5rem;">
+                  <tui-marker-icon
+
+                  mode="error"
+                  style="padding: 0; margin:0;"
+                  size="xs"
+                  src="tuiIconDislikeLarge"
+                  ></tui-marker-icon>
+
+                  <tui-marker-icon
+                  mode="success"
+                  style="padding: 0; margin:0;"
+                  size="xs"
+                  src="tuiIconLikeLarge"
+                  ></tui-marker-icon>
+
+                  <tui-marker-icon
+                  mode="warning"
+                  style="padding: 0; margin:0;"
+                  size="xs"
+                  src="tuiIconStarLarge"
+                  ></tui-marker-icon>
+
+                  <tui-marker-icon
+                  class="search"
+                  mode="primary"
+                  style="padding: 0; margin:0;"
+                  size="xs"
+                  src="tuiIconShowLarge"
+                ></tui-marker-icon>
+                </div>
+
+
+                <tui-island class="island">
+                  <tui-line-clamp
+                      [content]="content"
+                      [lineHeight]="20"
+                      [linesLimit]="4"
+                  ></tui-line-clamp>
+                </tui-island>
+                <ng-template #content>
+                    <div class="hint">
+                      <ol>
+                        <li >
+                            <tui-money class="current_price" [value]="r.current_price" [currency]="value"> </tui-money>
+                            &nbsp; &nbsp;
+                            <tui-money *ngIf="r.price_change_percentage_24h !== null" class="current_price" [value]="r.price_change_percentage_24h" [colored]="true" currency="%"> </tui-money>
+                        </li>
+                        <li>
+                          Market Cap: <tui-money [value]="r.market_cap" [currency]="value"> </tui-money>
+                        </li>
+                        <li>
+                          Circulating Supply: <span>{{(r.circulating_supply).toFixed(0)}}</span>
+                        </li>
+                        <li >
+                          All-Time High:
+                            <tui-money [value]="r.ath" [currency]="value"></tui-money> / <tui-money [value]="r.ath_change_percentage" [colored]="true" currency="%"></tui-money>
+                            <div class="date_high_low">
+                              {{ r.ath_date | date }}
+                            </div>
+                        </li>
+                        <li>
+                          All-Time Low:
+                            <tui-money [value]="r.atl" [currency]="value"></tui-money> / <tui-money [value]="r.atl_change_percentage" [colored]="true" currency="%"></tui-money>
+                            <div class="date_high_low">
+                              {{ r.atl_date | date }}
+                            </div>
+                        </li>
+                        <li *ngIf="r.low_24h !== null">
+                          24h Low / 24h High:
+                            <tui-money [value]="r.low_24h" [currency]="value"></tui-money> / <tui-money [value]="r.high_24h" [currency]="value"></tui-money>
+                        </li>
+                        <li>
+                          24 Hour Trading Vol:
+                            <tui-money [value]="r.total_volume" [currency]="value"></tui-money>
+                        </li>
+                      </ol>
+                    </div>
+                </ng-template>
+              </ng-template>
+          </tui-accordion-item>
+      </tui-accordion>
+      <div style="height: 170px;">
+      </div>
+      <!-- </tui-loader> -->
+
+    </tui-scrollbar>
+  </div>
+</tui-marker-icon>
+

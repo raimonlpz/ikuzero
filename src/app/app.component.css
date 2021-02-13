@@ -1,0 +1,10 @@
+.tabs-nav {
+  /* padding-left: 1rem; */
+  justify-content: center;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.notifications {
+
+  margin-right: 2.5rem;
+}
