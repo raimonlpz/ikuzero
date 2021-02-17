@@ -4,7 +4,21 @@
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.notifications {
+.container_full {
+  width: 100vw;
+  height: 100vh;
+}
 
-  margin-right: 2.5rem;
+.sidebar, .notifications{
+  position: absolute;
+}
+
+a {
+  list-style: none;
+  color: var(--tui-text-01);
+}
+
+.notifications {
+  right: 2.5rem;
+  top: 4rem;
 }

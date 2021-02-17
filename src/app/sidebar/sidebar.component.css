@@ -1,3 +1,9 @@
+* {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+
 .link {
   display: block;
   margin: 12px 0;
@@ -7,6 +13,7 @@
   cursor: pointer;
   margin: 1rem;
   box-shadow: 5px 2px 5px 1px rgba(0, 0, 0, 0.2);
+  z-index: 200;
 }
 
 .scroll {
@@ -61,6 +68,16 @@ tui-avatar {
 }
 .search:hover {
   animation: none;
+}
+
+.load-more {
+  margin-left: 50%;
+  margin-top: 30%;
+  transform: translate(-50%, -50%);
+}
+
+.accordion-item {
+  overflow: inherit
 }
 
 @-webkit-keyframes pulse {

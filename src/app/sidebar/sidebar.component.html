@@ -55,7 +55,6 @@
               <ng-template tuiAccordionItemContent>
                 <div style="display: flex; justify-content: space-evenly; margin-bottom:.5rem;">
                   <tui-marker-icon
-
                   mode="error"
                   style="padding: 0; margin:0;"
                   size="xs"
@@ -82,7 +81,8 @@
                   style="padding: 0; margin:0;"
                   size="xs"
                   src="tuiIconShowLarge"
-                ></tui-marker-icon>
+                  (click)="onCoinSelectedForDetailView(r.id)"
+                  ></tui-marker-icon>
                 </div>
 
 
@@ -136,6 +136,16 @@
           </tui-accordion-item>
       </tui-accordion>
       <div style="height: 170px;">
+        <button
+          tuiButton
+          size="s"
+          type="button"
+          class="load-more"
+          appearance="outline"
+          (click)="loadMoreCrypto()"
+        >
+            Load More
+        </button>
       </div>
       <!-- </tui-loader> -->
 

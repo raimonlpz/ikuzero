@@ -1,287 +1,42 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { TuiSidebarModule } from '@taiga-ui/addon-mobile';
-import {
-  TuiRootModule,
-  TuiNotificationsModule,
-  TuiDialogModule,
-  TuiThemeNightModule,
-  TuiModeModule,
-  TuiButtonModule,
-  TuiLinkModule,
-  TuiScrollbarModule
-} from '@taiga-ui/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
 
-import { iconsPathFactory, TUI_ICONS_PATH } from '@taiga-ui/core';
-import { TuiAccordionModule } from '@taiga-ui/kit';
-import {TuiActiveZoneModule} from '@taiga-ui/cdk';
-
-import {
-  TUI_SANITIZER,
-  TuiAutoFocusModule,
-  TuiElementModule,
-  TuiFilterPipeModule,
-  TuiLetModule,
-  TuiMapperPipeModule,
-  TuiMediaModule,
-} from '@taiga-ui/cdk';
-import {
-  TuiCalendarModule,
-  TuiColorModule,
-  TuiDataListModule,
-  TuiDropdownControllerModule,
-  TuiDropdownModule,
-  TuiErrorModule,
-  TuiExpandModule,
-  TuiFormatNumberPipeModule,
-  TuiFormatPhonePipeModule,
-  TuiGroupModule,
-  TuiHintControllerModule,
-  TuiHintModule,
-  TuiHostedDropdownModule,
-  TuiLabelModule,
-  TuiLoaderModule,
-  TuiManualHintModule,
-  TuiNotificationModule,
-  TuiPointerHintModule,
-  TuiPrimitiveCheckboxModule,
-  TuiPrimitiveTextfieldModule,
-  TuiSvgModule,
-  TuiSvgService,
-  TuiTextfieldControllerModule,
-  TuiTooltipModule,
-} from '@taiga-ui/core';
-import {
-  TuiActionModule,
-  TuiAvatarModule,
-  TuiBadgedContentModule,
-  TuiBadgeModule,
-  TuiBreadcrumbsModule,
-  TuiCalendarMonthModule,
-  TuiCalendarRangeModule,
-  TuiCheckboxBlockModule,
-  TuiCheckboxLabeledModule,
-  TuiCheckboxModule,
-  TuiComboBoxModule,
-  TuiDataListWrapperModule,
-  TuiDropdownSelectionModule,
-  TuiFieldErrorModule,
-  TuiFilterModule,
-  TuiHighlightModule,
-  TuiInputCopyModule,
-  TuiInputCountModule,
-  TuiInputDateModule,
-  TuiInputDateRangeModule,
-  TuiInputDateTimeModule,
-  TuiInputFileModule,
-  TuiInputInlineModule,
-  TuiInputModule,
-  TuiInputMonthModule,
-  TuiInputMonthRangeModule,
-  TuiInputNumberModule,
-  TuiInputPasswordModule,
-  TuiInputPhoneInternationalModule,
-  TuiInputPhoneModule,
-  TuiInputRangeModule,
-  TuiInputSliderModule,
-  TuiInputTagModule,
-  TuiInputTimeModule,
-  TuiIslandModule,
-  TuiLazyLoadingModule,
-  TuiLineClampModule,
-  TuiMarkerIconModule,
-  TuiMultiSelectModule,
-  TuiPaginationModule,
-  TuiPresentModule,
-  TuiRadioBlockModule,
-  TuiRadioLabeledModule,
-  TuiRadioListModule,
-  TuiRadioModule,
-  TuiSelectModule,
-  TuiSliderModule,
-  TuiStepperModule,
-  TuiTabsModule,
-  TuiTagModule,
-  TuiTextAreaModule,
-  TuiToggleModule,
-} from '@taiga-ui/kit';
-
-import * as icons from '@taiga-ui/icons';
-
-import {
-  TuiAxesModule,
-  TuiBarChartModule,
-  TuiLineChartModule,
-  TuiLineDaysChartModule,
-  TuiPieChartModule,
-  TuiRingChartModule,
-} from '@taiga-ui/addon-charts';
-import {
-  TuiCardModule,
-  TuiInputCardModule,
-  TuiInputCVCModule,
-  TuiInputExpireModule,
-  TuiMoneyModule,
-} from '@taiga-ui/addon-commerce';
-import {TuiColorPickerModule} from '@taiga-ui/addon-editor';
-import {
-  TuiElasticStickyModule,
-  TuiMobileCalendarModule,
-  TuiMobileDialogModule,
-  TuiPullToRefreshModule,
-  TuiRippleModule,
-  TuiTouchableModule,
-} from '@taiga-ui/addon-mobile';
-import {
-  TuiReorderModule,
-  TuiResizableColumnModule,
-  TuiTablePaginationModule,
-} from '@taiga-ui/addon-table';
+import { TaigaModule } from './taiga.module';
 
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { ExploreComponent } from './explore/explore.component';
+
+import { SanitizeHtmlPipe } from './shared/pipes/sanitize-html.pipe';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { LeaguesComponent } from './leagues/leagues.component';
+import { FavoriteComponent } from './favorite/favorite.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    ExploreComponent
+    ExploreComponent,
+    SanitizeHtmlPipe,
+    PortfolioComponent,
+    LeaguesComponent,
+    FavoriteComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
-        BrowserAnimationsModule,
-        TuiThemeNightModule,
-        TuiActiveZoneModule,
-        // Modules for main app.module that should be add once
-        TuiRootModule,
-        TuiDialogModule,
-        TuiNotificationsModule,
-        // Modules for your app modules where you use our components
-        TuiAccordionModule,
-        TuiActionModule,
-        TuiAvatarModule,
-        TuiBadgeModule,
-        TuiBadgedContentModule,
-        TuiButtonModule,
-        TuiCalendarModule,
-        TuiCalendarRangeModule,
-        TuiCalendarMonthModule,
-        TuiCardModule,
-        TuiAxesModule,
-        TuiLineChartModule,
-        TuiLineDaysChartModule,
-        TuiPieChartModule,
-        TuiBarChartModule,
-        TuiRingChartModule,
-        TuiCheckboxModule,
-        TuiCheckboxBlockModule,
-        TuiCheckboxLabeledModule,
-        TuiPrimitiveCheckboxModule,
-        TuiColorPickerModule,
-        TuiDataListModule,
-        TuiDataListWrapperModule,
-        TuiHostedDropdownModule,
-        TuiErrorModule,
-        TuiFieldErrorModule,
-        TuiExpandModule,
-        TuiFilterModule,
-        TuiGroupModule,
-        TuiMarkerIconModule,
-        TuiInputInlineModule,
-        TuiInputModule,
-        TuiInputDateModule,
-        TuiInputCardModule,
-        TuiInputCVCModule,
-        TuiInputExpireModule,
-        TuiInputCopyModule,
-        TuiInputCountModule,
-        TuiInputDateTimeModule,
-        TuiInputFileModule,
-        TuiInputMonthModule,
-        TuiInputMonthRangeModule,
-        TuiInputNumberModule,
-        TuiInputPasswordModule,
-        TuiInputPhoneModule,
-        TuiInputRangeModule,
-        TuiInputDateRangeModule,
-        TuiInputSliderModule,
-        TuiInputTagModule,
-        TuiInputTimeModule,
-        TuiInputPhoneInternationalModule,
-        TuiPrimitiveTextfieldModule,
-        TuiTextAreaModule,
-        TuiIslandModule,
-        TuiLabelModule,
-        TuiLineClampModule,
-        TuiLinkModule,
-        TuiLoaderModule,
-        TuiMoneyModule,
-        TuiNotificationModule,
-        TuiMobileDialogModule,
-        TuiMobileCalendarModule,
-        TuiPullToRefreshModule,
-        TuiRadioModule,
-        TuiRadioBlockModule,
-        TuiRadioLabeledModule,
-        TuiRadioListModule,
-        TuiComboBoxModule,
-        TuiMultiSelectModule,
-        TuiSelectModule,
-        TuiScrollbarModule,
-        TuiInputRangeModule,
-        TuiInputSliderModule,
-        TuiSliderModule,
-        TuiSvgModule,
-        TuiReorderModule,
-        TuiResizableColumnModule,
-        TuiTablePaginationModule,
-        TuiTagModule,
-        TuiToggleModule,
-        TuiTooltipModule,
-        TuiBreadcrumbsModule,
-        TuiPaginationModule,
-        TuiStepperModule,
-        TuiTabsModule,
-        TuiAutoFocusModule,
-        TuiColorModule,
-        TuiDropdownModule,
-        TuiDropdownSelectionModule,
-        TuiElasticStickyModule,
-        TuiElementModule,
-        TuiHighlightModule,
-        TuiHintModule,
-        TuiLazyLoadingModule,
-        TuiManualHintModule,
-        TuiPointerHintModule,
-        TuiLetModule,
-        TuiMediaModule,
-        TuiModeModule,
-        TuiPresentModule,
-        TuiRippleModule,
-        TuiSidebarModule,
-        TuiDropdownControllerModule,
-        TuiTouchableModule,
-        TuiHintControllerModule,
-        TuiTextfieldControllerModule,
-        TuiMoneyModule,
-        TuiFilterPipeModule,
-        TuiFormatNumberPipeModule,
-        TuiFormatPhonePipeModule,
-        TuiMapperPipeModule,
-        HttpClientModule,
-        FormsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    TaigaModule
   ],
-  providers: [
-    {
-      provide: TUI_ICONS_PATH,
-      useValue: iconsPathFactory('assets/taiga-ui/icons/'),
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

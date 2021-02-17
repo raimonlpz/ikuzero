@@ -2,3 +2,8 @@
 body {
   background-color: rgb(32, 31, 31);
 }
+
+a {
+  color: cyan;
+  text-decoration: none;
+}

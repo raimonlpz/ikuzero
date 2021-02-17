@@ -3,23 +3,23 @@
   <tui-tabs-with-more class="tabs-nav" [itemsLimit]="4" [(activeItemIndex)]="activeItemIndex">
     <button *tuiTab tuiTab type="button">
         <tui-svg src="tuiIconShowLarge" class="tui-space_right-2"></tui-svg>
-        Explore
+        <a routerLink="/explore" (click)="onCoinSelected(coinSelected)">Explore</a>
     </button>
     <button *tuiTab tuiTab type="button">
         <tui-svg src="tuiIconChartLarge" class="tui-space_right-2"></tui-svg>
-        Portfolio
+        <a routerLink="/portfolio">Portfolio</a>
     </button>
     <button *tuiTab tuiTab type="button" >
         <tui-svg src="tuiIconCommentLarge" class="tui-space_right-2"></tui-svg>
-        Leagues
+        <a routerLink="/leagues">Leagues</a>
     </button>
     <button *tuiTab tuiTab type="button" >
         <tui-svg src="tuiIconStarLarge" class="tui-space_right-2"></tui-svg>
-        Favorite
+        <a routerLink="/favorite">Favorite</a>
     </button>
     <button *tuiTab tuiTab type="button" >
         <tui-svg src="tuiIconSettings" class="tui-space_right-2"></tui-svg>
-        Settings
+        <a routerLink="/settings">Settings</a>
     </button>
     <button *tuiTab tuiTab type="button" >
         <tui-svg src="tuiIconLogoutLarge" class="tui-space_right-2"></tui-svg>
@@ -27,9 +27,10 @@
     </button>
   </tui-tabs-with-more>
 
-  <div style="display: flex; justify-content: space-between;">
-    <app-sidebar></app-sidebar>
-    <app-explore></app-explore>
+  <div>
+    <!-- <app-explore [coinData]="coinData | async" class="explore"></app-explore> -->
+    <app-sidebar (coinSelection)="onCoinSelected($event)" class="sidebar"></app-sidebar>
+    <router-outlet class="container_full"></router-outlet>
     <div class="container notifications">
       <div class="tui-row">
         <div class="">
@@ -37,11 +38,11 @@
               <div class="tui-island__content">
                   <figure class="tui-island__figure">
                     <tui-badged-content
-                    class="tui-space_right-1"
-                    colorTop="var(--tui-success-fill)"
-                    size="s"
-                    [contentTop]="64"
-                    [rounded]="true"
+                      class="tui-space_right-1"
+                      colorTop="var(--tui-success-fill)"
+                      size="s"
+                      [contentTop]="64"
+                      [rounded]="true"
                     >
                       <tui-avatar class="tui-space_top-1" [avatarUrl]="'https://avatars.dicebear.com/4.5/api/avataaars/eweweewwwwweewweewewwweewdwe.svg'" [rounded]="true"></tui-avatar>
                     </tui-badged-content>
@@ -50,19 +51,7 @@
                       <!-- <h3 class="tui-island__title">@raimonlpez97</h3> -->
                       <p class="tui-island__paragraph">
                           Hi, Rai!
-                          <!-- <br>
-                            Ready for the trade? -->
-
                       </p>
-                      <!-- <button
-                          tuiButton
-                          type="button"
-                          class="tui-island__footer-button"
-                          appearance="flat"
-                          size="s"
-                      >
-                         Activity
-                      </button> -->
                   </div>
               </div>
           </tui-island>
@@ -70,6 +59,5 @@
       </div>
     </div>
   </div>
-
-
 </tui-root>
+

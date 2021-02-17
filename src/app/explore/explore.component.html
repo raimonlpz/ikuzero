@@ -1,1 +1,47 @@
-<p>explore works!</p>
+
+  <div class="tui-container_fullwidth container">
+    <tui-loader
+      class="tui-space_right-2"
+      [showLoader]="isLoading"
+      [inheritColor]="true"
+      [overlay]="true"
+    >
+      <div class="tui-row tui-space_top-5 logo">
+        <div><tui-avatar class="tui-space_top-1 coin-logo" size="l" [avatarUrl]="coinData?.image?.large"></tui-avatar></div>
+        <h1 class="tui-text_body-xl">{{coinData?.name}}</h1>
+        <div class="rank" *ngIf="coinData">
+          <tui-tag
+            class="tag"
+            [hoverable]="true"
+            status="primary"
+            [value]="'Market Cap Rank  #' + coinData.coingecko_rank"
+	        ></tui-tag>
+        </div>
+      </div>
+      <tui-axes class="axes" [verticalLines]="10" [horizontalLines]="6" *ngIf="value && yHeight">
+        <tui-line-chart
+            [x]="0"
+            [y]="0"
+            [width]="value.length - 1"
+            [height]="yHeight / 0.75"
+            [smoothingFactor]="50"
+            [value]="value"
+            [filled]="true"
+            [xStringify]="stringify"
+            [yStringify]="stringify"
+        ></tui-line-chart>
+      </tui-axes>
+      <div class="coin-data">
+        <div class="container-right">
+          <tui-scrollbar class="box" *ngIf="coinData?.description.en">
+            <div class="content" >
+              <div [innerHTML]="coinData.description.en | sanitizeHtml"></div>
+            </div>
+          </tui-scrollbar>
+        </div>
+      </div>
+    </tui-loader>
+  </div>
+
+
+
