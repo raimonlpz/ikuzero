@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { bitcoinUnitsBlob, commoditiesBlob, cryptocurrenciesBlob, fiatCurrenciesBlob, suggestedCurrenciesBlob } from '../shared/data';
 import { SidebarService } from '../shared/services/sidebar.service';
-
-// TODO - LOADER IN CRYPTO SIDEBAR
 
 @Component({
   selector: 'app-sidebar',
@@ -12,10 +11,10 @@ import { SidebarService } from '../shared/services/sidebar.service';
 })
 export class SidebarComponent implements OnInit {
   open = false;
-  res = [];
-
   loading = false;
+  res = [];
   value = 'USD';
+  lastValue = this.value;
   pagination = 1;
 
   @Output() coinSelection = new EventEmitter<string>();
@@ -26,7 +25,7 @@ export class SidebarComponent implements OnInit {
   readonly fiatCurrencies = fiatCurrenciesBlob;
   readonly commodities = commoditiesBlob;
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor(private sidebarService: SidebarService,  private router: Router) { }
 
   ngOnInit(): void {
     this.fetchCryptoData(this.value);
@@ -35,6 +34,7 @@ export class SidebarComponent implements OnInit {
   toggle(open: boolean): void {
       this.open = open;
       this.res = [...this.res.slice(0, 49)];
+      this.pagination = 1;
   }
 
   onSelect(): void {
@@ -42,15 +42,18 @@ export class SidebarComponent implements OnInit {
   }
 
   fetchCryptoData(value?: string): void {
+    const currencyChange = this.lastValue !== this.value;
+
+    if (currencyChange) {
+      this.lastValue = this.value;
+      this.pagination = 1;
+    }
     this.loading = true;
 
-    if (value !== this.value) {
-      this.value = value;
-      this.pagination = 1;
-      this.res = [];
-    }
-
-    this.sidebarService.fetchSidebarCryptoData(this.value, this.pagination).subscribe(r => {
+    this.sidebarService.fetchSidebarCryptoData(value, this.pagination).subscribe(r => {
+      if (currencyChange) {
+        this.res = [];
+      }
       this.loading = false;
       this.res = [...this.res, ...r];
     });
@@ -59,10 +62,12 @@ export class SidebarComponent implements OnInit {
   onCoinSelectedForDetailView(coin: string): void {
     this.coinSelection.emit(coin);
     this.toggle(!this.open);
+    this.router.navigate(['/explore']);
   }
 
   loadMoreCrypto(): void {
     this.pagination++;
+    this.loading = true;
     this.fetchCryptoData(this.value);
   }
 }

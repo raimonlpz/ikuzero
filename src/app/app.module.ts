@@ -16,6 +16,8 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { LeaguesComponent } from './leagues/leagues.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { SettingsComponent } from './settings/settings.component';
+import { HomeComponent } from './home/home.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { SettingsComponent } from './settings/settings.component';
     PortfolioComponent,
     LeaguesComponent,
     FavoriteComponent,
-    SettingsComponent
+    SettingsComponent,
+    HomeComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,30 +1,27 @@
 <tui-theme-night></tui-theme-night>
 <tui-root >
   <tui-tabs-with-more class="tabs-nav" [itemsLimit]="4" [(activeItemIndex)]="activeItemIndex">
-    <button *tuiTab tuiTab type="button">
-        <tui-svg src="tuiIconShowLarge" class="tui-space_right-2"></tui-svg>
-        <a routerLink="/explore" (click)="onCoinSelected(coinSelected)">Explore</a>
-    </button>
-    <button *tuiTab tuiTab type="button">
-        <tui-svg src="tuiIconChartLarge" class="tui-space_right-2"></tui-svg>
-        <a routerLink="/portfolio">Portfolio</a>
-    </button>
-    <button *tuiTab tuiTab type="button" >
-        <tui-svg src="tuiIconCommentLarge" class="tui-space_right-2"></tui-svg>
-        <a routerLink="/leagues">Leagues</a>
-    </button>
-    <button *tuiTab tuiTab type="button" >
-        <tui-svg src="tuiIconStarLarge" class="tui-space_right-2"></tui-svg>
-        <a routerLink="/favorite">Favorite</a>
-    </button>
-    <button *tuiTab tuiTab type="button" >
-        <tui-svg src="tuiIconSettings" class="tui-space_right-2"></tui-svg>
-        <a routerLink="/settings">Settings</a>
-    </button>
-    <button *tuiTab tuiTab type="button" >
-        <tui-svg src="tuiIconLogoutLarge" class="tui-space_right-2"></tui-svg>
-        Logout
-    </button>
+    <a *tuiTab tuiTab routerLink="/" routerLinkActive [routerLinkActiveOptions]="{exact: true}">
+      <tui-svg src="tuiIconAlignJustifyLarge" class="tui-space_right-2"></tui-svg> Home
+    </a>
+    <a *tuiTab tuiTab routerLink="/explore" routerLinkActive (click)="onCoinSelected(coinSelected)">
+      <tui-svg src="tuiIconShowLarge" class="tui-space_right-2"></tui-svg> Explore
+    </a>
+    <a *tuiTab tuiTab routerLink="/portfolio" routerLinkActive >
+      <tui-svg src="tuiIconChartLarge" class="tui-space_right-2"></tui-svg> Portfolio
+    </a>
+    <a *tuiTab tuiTab routerLink="/leagues" routerLinkActive >
+      <tui-svg src="tuiIconCommentLarge" class="tui-space_right-2"></tui-svg> Leagues
+    </a>
+    <a *tuiTab tuiTab routerLink="/favorite" routerLinkActive >
+      <tui-svg src="tuiIconStarLarge" class="tui-space_right-2"></tui-svg> Favorite
+    </a>
+    <a *tuiTab tuiTab routerLink="/settings" routerLinkActive >
+      <tui-svg src="tuiIconSettings" class="tui-space_right-2"></tui-svg> Settings
+    </a>
+    <a *tuiTab tuiTab routerLinkActive >
+      <tui-svg src="tuiIconLogoutLarge" class="tui-space_right-2"></tui-svg> Logout
+    </a>
   </tui-tabs-with-more>
 
   <div>

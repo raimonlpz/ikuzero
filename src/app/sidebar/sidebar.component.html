@@ -39,7 +39,6 @@
         </tui-data-list>
       </tui-select>
 
-      <!-- <tui-loader [overlay]="true" [showLoader]="loading"> -->
       <tui-accordion [rounded]="false">
           <tui-accordion-item borders="top-bottom" *ngFor="let r of res" [size]="'s'">
             <div class="crypto-name">
@@ -135,6 +134,7 @@
               </ng-template>
           </tui-accordion-item>
       </tui-accordion>
+      <tui-loader [overlay]="true" [showLoader]="loading">
       <div style="height: 170px;">
         <button
           tuiButton
@@ -147,7 +147,7 @@
             Load More
         </button>
       </div>
-      <!-- </tui-loader> -->
+      </tui-loader>
 
     </tui-scrollbar>
   </div>
