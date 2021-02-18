@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { TaigaModule } from './taiga.module';
@@ -38,7 +39,8 @@ import { LandingComponent } from './landing/landing.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    TaigaModule
+    TaigaModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

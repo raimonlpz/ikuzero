@@ -1,1 +1,157 @@
-<p>landing works!</p>
+
+<div class="landing-container">
+  <div class="left">
+    <div class="content">
+      <tui-badge class="tui-space_horizontal-2" [status]="flashCoins.changePercent > 0 ? 'success' : 'error'" [value]="flashCoins.idCoin.toUpperCase() + '  ' + flashCoins.changePercent + '%'" *ngIf="flashCoins"></tui-badge>
+      <tui-action icon="tuiIconHeartLarge" style="color:var(--tui-negative);" disabled="true">
+        <h1 class="tui-text_body-xl">IKU.LAND</h1>
+      </tui-action>
+      <tui-tabs [(activeItemIndex)]="activeItemIndex">
+        <button tuiTab type="button">
+            <tui-svg src="tuiIconMobileLarge" class="tui-space_right-2"></tui-svg>
+            Hello
+        </button>
+        <button tuiTab type="button">
+            <tui-svg src="tuiIconLoginLarge" class="tui-space_right-2"></tui-svg>
+            Login
+        </button>
+        <button tuiTab type="button">
+            <tui-svg src="tuiIconLockOpenLarge" class="tui-space_right-2"></tui-svg>
+            Signup
+        </button>
+      </tui-tabs>
+      <img src="../../assets/giphy.gif" class="video" width="150" *ngIf="activeItemIndex == 0">
+
+      <div class="login" *ngIf="activeItemIndex == 1">
+
+        <form [formGroup]="loginForm">
+	        <div class="">
+	                <h3 class="tui-form__header tui-form__header">
+	                    Login
+	                </h3>
+	                <div class="email">
+	                    <tui-input
+	                        tuiTextfieldExampleText="Your email"
+	                        formControlName="emailValue"
+	                        tuiHintContent="A tooltip"
+	                    >
+	                        Email<span class="tui-required"></span>
+	                    </tui-input>
+	                    <tui-field-error
+	                        formControlName="emailValue"
+	                    ></tui-field-error>
+                  </div>
+                  <div class="password">
+                    <tui-input-password formControlName="passwordValue">
+                        Password<span class="tui-required"></span>
+                    </tui-input-password>
+                    <tui-field-error
+                        formControlName="passwordValue"
+                    ></tui-field-error>
+                  </div>
+                  <div class="button-go-container">
+                    <button
+	                    tuiIconButton
+                      type="button"
+                      size="s"
+                      appearance="outline"
+                      shape="square"
+                      class="button-go"
+                      [icon]="'tuiIconArrowRightLarge'"
+                      (click)="onLogin()"
+                    ></button>
+                  </div>
+          </div>
+        </form>
+      </div>
+
+
+      <div class="login" *ngIf="activeItemIndex == 2">
+        <form [formGroup]="signupForm">
+	        <div class="">
+	                <h3 class="tui-form__header tui-form__header">
+	                    Signup
+	                </h3>
+                  <div class="name">
+                    <tui-input
+                        tuiTextfieldExampleText="Your name"
+                        formControlName="nameValue"
+                        tuiHintContent="A tooltip"
+                    >
+                        Name<span class="tui-required"></span>
+                    </tui-input>
+                    <tui-field-error
+                        formControlName="nameValue"
+                    ></tui-field-error>
+                  </div>
+                  <div class="birthdate">
+                    <tui-input-date
+	                        tuiTextfieldExampleText="Your Birthdate"
+	                        formControlName="birthdateValue"
+	                    >
+	                        Birthdate<span class="tui-required"></span>
+	                    </tui-input-date>
+	                    <tui-field-error
+	                        formControlName="birthdateValue"
+	                    ></tui-field-error>
+                  </div>
+
+
+	                <div class="email">
+	                    <tui-input
+	                        tuiTextfieldExampleText="Your email"
+	                        formControlName="emailValue"
+	                        tuiHintContent="A tooltip"
+	                    >
+	                        Email<span class="tui-required"></span>
+	                    </tui-input>
+	                    <tui-field-error
+	                        formControlName="emailValue"
+	                    ></tui-field-error>
+                  </div>
+                  <div class="password">
+                    <tui-input-password formControlName="passwordValue">
+                        Password<span class="tui-required"></span>
+                    </tui-input-password>
+                    <tui-field-error
+                        formControlName="passwordValue"
+                    ></tui-field-error>
+                  </div>
+                  <div class="button-go-container">
+                    <button
+	                    tuiIconButton
+                      type="button"
+                      size="s"
+                      appearance="outline"
+                      shape="square"
+                      class="button-go"
+                      [icon]="'tuiIconArrowRightLarge'"
+                      (click)="onSignUp()"
+                    ></button>
+                  </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <div class="right">
+    <div class="tui-container tui-container_adaptive tui-container_example">
+	    <div class="tui-row tui-row_adaptive">
+	        <div
+	            class="tui-col_xs-2 tui-col_s-2 tui-col_sm-1 tui-col_md-1 tui-col_lg-1"
+              *ngFor="let c of coins"
+	        >
+          <tui-avatar
+            class="tui-space_top-1 avatar"
+            [avatarUrl]="c.image"
+            size="m"
+            [rounded]="true"
+	        ></tui-avatar>
+
+	        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

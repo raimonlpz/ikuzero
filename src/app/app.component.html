@@ -1,6 +1,7 @@
 <tui-theme-night></tui-theme-night>
 <tui-root >
-  <tui-tabs-with-more class="tabs-nav" [itemsLimit]="4" [(activeItemIndex)]="activeItemIndex">
+
+  <tui-tabs-with-more class="tabs-nav" [itemsLimit]="4" [(activeItemIndex)]="activeItemIndex" *ngIf="isAuthenticated">
     <a *tuiTab tuiTab routerLink="/" routerLinkActive [routerLinkActiveOptions]="{exact: true}">
       <tui-svg src="tuiIconAlignJustifyLarge" class="tui-space_right-2"></tui-svg> Home
     </a>
@@ -26,9 +27,9 @@
 
   <div>
     <!-- <app-explore [coinData]="coinData | async" class="explore"></app-explore> -->
-    <app-sidebar (coinSelection)="onCoinSelected($event)" class="sidebar"></app-sidebar>
+    <app-sidebar (coinSelection)="onCoinSelected($event)" class="sidebar" *ngIf="isAuthenticated"></app-sidebar>
     <router-outlet class="container_full"></router-outlet>
-    <div class="container notifications">
+    <div class="container notifications" *ngIf="isAuthenticated">
       <div class="tui-row">
         <div class="">
           <tui-island size="s" textAlign="center" [hoverable]="true">

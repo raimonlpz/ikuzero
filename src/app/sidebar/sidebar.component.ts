@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
   readonly fiatCurrencies = fiatCurrenciesBlob;
   readonly commodities = commoditiesBlob;
 
-  constructor(private sidebarService: SidebarService,  private router: Router) { }
+  constructor(private sidebarService: SidebarService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchCryptoData(this.value);

@@ -11,11 +11,11 @@ export class SidebarService {
 
   constructor(private http: HttpClient) { }
 
-  fetchSidebarCryptoData(currency: string, page: number = 1): Observable<Array<{}>> {
+  fetchSidebarCryptoData(currency: string, page: number = 1, xpage: number = 50): Observable<Array<{}>> {
     return this.http
       .get<Array<{}>>(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${
-          currency}&order=market_cap_desc&per_page=50&page=${
+          currency}&order=market_cap_desc&per_page=${xpage}&page=${
           page}&sparkline=false`
       );
   }
