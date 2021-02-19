@@ -1,1 +1,74 @@
-<p>home works!</p>
+<tui-loader
+	    class="inline-flex tui-space_right-2"
+	    [showLoader]="chartCoinsDataIsLoading"
+	    [inheritColor]="true"
+	    [overlay]="true"
+>
+
+<div *ngIf="overallMarket" icon="tuiIconStarLarge" class="overall-wrapper">
+    <div class="overall-el">Coins: <span class="overall-el-highlight">{{overallMarket.activeCoins}}</span></div>
+    <div class="overall-el">Markets: <span class="overall-el-highlight">{{overallMarket.activeMarkets}}</span></div>
+    <div class="overall-el">Market Cap: <span class="overall-el-highlight">{{overallMarket.marketCapChangePercent | number : '1.2-2'}}%</span></div>
+    <div class="overall-el">Active ICOs: <span class="overall-el-highlight">{{overallMarket.ongoingIcos}}</span></div>
+    <div class="overall-el">Ended ICOs: <span class="overall-el-highlight">{{overallMarket.endedIcos}}</span></div>
+    <div class="overall-el">Dominance: BTC <span class="overall-el-highlight">{{overallMarket.dominanceBtcPercent | number : '1.2-2'}}%</span>  | ETH <span class="overall-el-highlight">{{overallMarket.dominanceEthPercent | number : '1.2-2'}}%</span></div>
+</div>
+
+
+
+<tui-scrollbar class="table-box">
+  <table class="tui-table home-table">
+    <tbody>
+        <tr class="tui-table__tr">
+            <!-- <th class="tui-table__th">
+                <tui-checkbox [formControl]="testValue"></tui-checkbox>
+            </th> -->
+            <th class="tui-table__th">#</th>
+            <th class="tui-table__th">Coin</th>
+            <th class="tui-table__th">Symbol</th>
+            <th class="tui-table__th">Price</th>
+            <th class="tui-table__th">1h</th>
+            <th class="tui-table__th">24h</th>
+            <th class="tui-table__th">7d</th>
+            <th class="tui-table__th">24h Volume</th>
+            <th class="tui-table__th">Mkt Cap</th>
+            <th class="tui-table__th">Last 7 Days</th>
+        </tr>
+        <tr class="tui-table__tr" *ngFor="let c of coins; let i = index">
+              <td class="tui-table__td row-el" style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.market_cap_rank ? c.market_cap_rank  : '-'}}</td>
+              <td class="tui-table__td row-el" style="display:flex; height:max-content; font-size: .8rem" (click)="exploreCertainCoin(c.id)">
+                <tui-avatar class="tui-space_top-1" [avatarUrl]="c.image" size="xs" [rounded]="true" style="margin-right:.5rem;"></tui-avatar>
+                {{c.name}}
+              </td>
+              <td class="tui-table__td row-el"  style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.symbol.toUpperCase()}}</td>
+              <td class="tui-table__td row-el" style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.current_price}}$</td>
+              <td class="tui-table__td row-el" style="font-size: .8rem" [style]="c.price_change_percentage_1h_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_1h_in_currency ? (c.price_change_percentage_1h_in_currency | number : '1.2-2') : '- '}}%</td>
+              <td class="tui-table__td row-el" style="font-size: .8rem" [style]="c.price_change_percentage_24h_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_24h_in_currency ? (c.price_change_percentage_24h_in_currency | number : '1.2-2') : '- '}}%</td>
+              <td class="tui-table__td row-el" style="font-size: .8rem" [style]="c.price_change_percentage_7d_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_7d_in_currency ? (c.price_change_percentage_7d_in_currency | number : '1.2-2') : '- '}}%</td>
+              <td class="tui-table__td row-el"style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.total_volume}}$</td>
+              <td class="tui-table__td row-el" style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.market_cap}}$</td>
+              <td class="tui-table__td row-el" (click)="exploreCertainCoin(c.id)">
+                <tui-axes class="axes" [verticalLines]="7" [horizontalLines]="1" style="width: 100px; height: 30px; color: #bc71c9;">
+                  <tui-line-chart
+                      [x]="0"
+                      [y]="getStartingHeightForSparklineChart(c.sparkline_in_7d.price) * .75"
+                      [width]="c.sparkline_in_7d.price.length - 1"
+                      [smoothingFactor]="90"
+                      [height]="getHeightForSparklineChart(c.sparkline_in_7d.price) * .75"
+                      color="pink"
+                      [value]="getValueArrayForSparkline(c.sparkline_in_7d.price)"
+                  ></tui-line-chart>
+              </tui-axes>
+              </td>
+        </tr>
+    </tbody>
+  </table>
+</tui-scrollbar>
+</tui-loader>
+<tui-pagination
+      *ngIf="!chartCoinsDataIsLoading"
+      class="pagination"
+	    [length]="length"
+	    [index]="index"
+	    (indexChange)="goToPage($event)"
+	></tui-pagination>

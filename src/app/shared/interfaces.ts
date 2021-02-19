@@ -16,6 +16,15 @@ export interface CoinData {
   coingecko_rank: number;
 }
 
+export interface OverallMarketStats {
+  activeCoins: number;
+  activeMarkets: number;
+  ongoingIcos: number;
+  endedIcos: number;
+  dominanceBtcPercent: number;
+  dominanceEthPercent: number;
+  marketCapChangePercent: number;
+}
 
 // interface CoinGeckoResponse {
 //   id: string;

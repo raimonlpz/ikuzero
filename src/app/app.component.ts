@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from './shared/services/auth.service';
-import { SidebarService } from './shared/services/sidebar.service';
+import { CoingeckoService } from './shared/services/coingecko.service';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +14,13 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean;
   authSub$: Subscription;
 
-  constructor(private sidebarService: SidebarService, private authService: AuthService) {}
+  constructor(private coingeckoService: CoingeckoService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.coinSelected = 'ethereum';
     this.onCoinSelected(this.coinSelected);
-    this.isAuthenticated = this.authService.isAuth;
+    // this.isAuthenticated = this.authService.isAuth;
+    this.isAuthenticated = true;
 
     this.authSub$ = this.authService.changeOnAuth.subscribe(is => {
       this.isAuthenticated = is;
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onCoinSelected(coin: string): void {
     this.coinSelected = coin;
-    this.sidebarService.fetchDetailCoinData(this.coinSelected);
+    this.coingeckoService.fetchDetailCoinData(this.coinSelected);
   }
 
   ngOnDestroy(): void {

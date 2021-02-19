@@ -5,19 +5,31 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SidebarService {
+export class CoingeckoService {
   private coinData = new Subject<any>();
   private detailCoinDataIsLoading = new Subject<boolean>();
 
   constructor(private http: HttpClient) { }
 
-  fetchSidebarCryptoData(currency: string, page: number = 1, xpage: number = 50): Observable<Array<{}>> {
+  fetchSidebarCryptoData(
+    currency: string,
+    page: number = 1,
+    xpage: number = 50
+  ): Observable<Array<{}>> {
     return this.http
       .get<Array<{}>>(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${
           currency}&order=market_cap_desc&per_page=${xpage}&page=${
           page}&sparkline=false`
       );
+  }
+
+  fetchTableCryptoData(page: number = 1): Observable<Array<any>> {
+      return this.http
+        .get<Array<any>>(
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${
+            page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`
+        );
   }
 
   fetchDetailCoinData(coin: string): void {
@@ -32,6 +44,14 @@ export class SidebarService {
     });
   }
 
+  fetchOverallStats(): Observable<any> {
+    return this.http.get('https://api.coingecko.com/api/v3/global');
+  }
+
+  fetchCryptoTrending(): Observable<any> {
+    return this.http.get('https://api.coingecko.com/api/v3/search/trending');
+  }
+
   getDetailCoinData(): Observable<any> {
     return this.coinData.asObservable();
   }
@@ -39,4 +59,6 @@ export class SidebarService {
   getDatailCoinDataIsLoading(): Observable<boolean> {
     return this.detailCoinDataIsLoading.asObservable();
   }
+
+
 }

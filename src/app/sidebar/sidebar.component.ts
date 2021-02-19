@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { bitcoinUnitsBlob, commoditiesBlob, cryptocurrenciesBlob, fiatCurrenciesBlob, suggestedCurrenciesBlob } from '../shared/data';
-import { SidebarService } from '../shared/services/sidebar.service';
+import { CoingeckoService } from '../shared/services/coingecko.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
   readonly fiatCurrencies = fiatCurrenciesBlob;
   readonly commodities = commoditiesBlob;
 
-  constructor(private sidebarService: SidebarService, private router: Router) { }
+  constructor(private coingeckoService: CoingeckoService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchCryptoData(this.value);
@@ -50,7 +50,7 @@ export class SidebarComponent implements OnInit {
     }
     this.loading = true;
 
-    this.sidebarService.fetchSidebarCryptoData(value, this.pagination).subscribe(r => {
+    this.coingeckoService.fetchSidebarCryptoData(value, this.pagination).subscribe(r => {
       if (currencyChange) {
         this.res = [];
       }

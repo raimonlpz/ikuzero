@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SidebarService } from './sidebar.service';
+import { CoingeckoService } from './coingecko.service';
 
-describe('SidebarService', () => {
-  let service: SidebarService;
+describe('CoingeckoService', () => {
+  let service: CoingeckoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SidebarService);
+    service = TestBed.inject(CoingeckoService);
   });
 
   it('should be created', () => {

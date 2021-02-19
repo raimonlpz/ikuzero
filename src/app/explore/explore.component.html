@@ -18,12 +18,12 @@
 	        ></tui-tag>
         </div>
       </div>
-      <tui-axes class="axes" [verticalLines]="10" [horizontalLines]="6" *ngIf="value && yHeight">
+      <tui-axes class="axes" [verticalLines]="7" [horizontalLines]="6" *ngIf="value && yHeight">
         <tui-line-chart
             [x]="0"
-            [y]="0"
+            [y]="yMinHeight * .75"
             [width]="value.length - 1"
-            [height]="yHeight / 0.75"
+            [height]="yHeight * .75"
             [smoothingFactor]="50"
             [value]="value"
             [filled]="true"

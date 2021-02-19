@@ -88,44 +88,50 @@
                 <tui-island class="island">
                   <tui-line-clamp
                       [content]="content"
-                      [lineHeight]="20"
-                      [linesLimit]="4"
+                      [lineHeight]="18"
+                      [linesLimit]="5"
                   ></tui-line-clamp>
                 </tui-island>
                 <ng-template #content>
-                    <div class="hint">
+                    <div class="hint" style="text-align: center;">
                       <ol>
                         <li >
                             <tui-money class="current_price" [value]="r.current_price" [currency]="value"> </tui-money>
                             &nbsp; &nbsp;
                             <tui-money *ngIf="r.price_change_percentage_24h !== null" class="current_price" [value]="r.price_change_percentage_24h" [colored]="true" currency="%"> </tui-money>
                         </li>
+                        <hr style="margin:.3rem; margin-left:20%;margin-right:20%"/>
                         <li>
-                          Market Cap: <tui-money [value]="r.market_cap" [currency]="value"> </tui-money>
+                          <span class="label-island">Market Cap: </span> <tui-money [value]="r.market_cap" [currency]="value"> </tui-money>
                         </li>
+                        <hr style="margin:.3rem; margin-left:20%;margin-right:20%"/>
                         <li>
-                          Circulating Supply: <span>{{(r.circulating_supply).toFixed(0)}}</span>
+                          <span class="label-island">Circulating Supply: </span> <span style="font-size: .7rem;">{{(r.circulating_supply).toFixed(0)}}</span>
                         </li>
+                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
                         <li >
-                          All-Time High:
+                          <span class="label-island">All-Time High: </span>
                             <tui-money [value]="r.ath" [currency]="value"></tui-money> / <tui-money [value]="r.ath_change_percentage" [colored]="true" currency="%"></tui-money>
                             <div class="date_high_low">
                               {{ r.ath_date | date }}
                             </div>
                         </li>
+                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
                         <li>
-                          All-Time Low:
+                          <span class="label-island">All-Time Low: </span>
                             <tui-money [value]="r.atl" [currency]="value"></tui-money> / <tui-money [value]="r.atl_change_percentage" [colored]="true" currency="%"></tui-money>
                             <div class="date_high_low">
                               {{ r.atl_date | date }}
                             </div>
                         </li>
+                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
                         <li *ngIf="r.low_24h !== null">
-                          24h Low / 24h High:
+                          <span class="label-island">24h Low / 24h High: </span>
                             <tui-money [value]="r.low_24h" [currency]="value"></tui-money> / <tui-money [value]="r.high_24h" [currency]="value"></tui-money>
                         </li>
+                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
                         <li>
-                          24 Hour Trading Vol:
+                          <span class="label-island">24 Hour Trading Vol: </span>
                             <tui-money [value]="r.total_volume" [currency]="value"></tui-money>
                         </li>
                       </ol>

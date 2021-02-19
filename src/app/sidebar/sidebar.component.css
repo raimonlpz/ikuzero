@@ -80,6 +80,16 @@ tui-avatar {
   overflow: inherit
 }
 
+tui-money {
+  font-size: .7rem;
+}
+
+.label-island {
+  color: #6788ff;
+  font-size: .7rem;
+  font-weight: bold;
+}
+
 @-webkit-keyframes pulse {
   0% {
     -webkit-box-shadow: 0 0 0 0 rgba(212, 184, 79, 0.4);

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SidebarService } from '../shared/services/sidebar.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoingeckoService } from '../shared/services/coingecko.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
 import { AuthService } from '../shared/services/auth.service';
@@ -29,9 +29,10 @@ interface FlashCoins {
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements OnInit, OnDestroy {
   activeItemIndex = 0;
   coins: Array<any>;
+  intervalSub: any;
 
   flashCoins: FlashCoins;
 
@@ -49,18 +50,18 @@ export class LandingComponent implements OnInit {
 
 
   constructor(
-    private sidebarService: SidebarService,
+    private coingeckoService: CoingeckoService,
     private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.sidebarService.fetchSidebarCryptoData('USD', 1, 250).subscribe((r: any) => {
+    this.coingeckoService.fetchSidebarCryptoData('USD', 1, 250).subscribe((r: any) => {
       this.coins = r;
       let counter = 0;
       this.setFlashCoins(r[counter]);
 
-      setInterval(() => {
+      this.intervalSub = setInterval(() => {
         if (counter < 249) {
           counter++;
         }  else {
@@ -68,6 +69,7 @@ export class LandingComponent implements OnInit {
         }
         this.setFlashCoins(r[counter]);
       }, 850);
+
     });
   }
 
@@ -88,5 +90,9 @@ export class LandingComponent implements OnInit {
     this.authService.isAuth = true;
     this.router.navigate(['']);
     // console.log(this.signupForm.valueChanges);
+  }
+
+  ngOnDestroy(): void {
+    window.clearInterval(this.intervalSub);
   }
 }

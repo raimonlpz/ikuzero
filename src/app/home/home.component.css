@@ -1,3 +1,38 @@
-* {
-  text-align: center;
+.table-box {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+
+}
+
+.pagination {
+  margin: 3rem;
+}
+
+.row-el:hover {
+  cursor: pointer;
+}
+
+.overall-wrapper {
+  display:flex;
+  border: .2px solid rgb(90, 88, 85);
+  border-radius: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  padding: 1rem;
+}
+
+.overall-el {
+  padding-left: 1rem;
+  font-size: .8rem;
+
+}
+
+.overall-el-highlight {
+  font-weight: bold;
+  color: #6788ff;
 }
