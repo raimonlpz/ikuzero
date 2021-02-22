@@ -19,6 +19,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HomeComponent } from './home/home.component';
 import { LandingComponent } from './landing/landing.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LandingComponent } from './landing/landing.component';
     FavoriteComponent,
     SettingsComponent,
     HomeComponent,
-    LandingComponent
+    LandingComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

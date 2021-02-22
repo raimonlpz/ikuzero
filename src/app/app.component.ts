@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { User } from './shared/interfaces';
 import { AuthService } from './shared/services/auth.service';
 import { CoingeckoService } from './shared/services/coingecko.service';
 
@@ -14,6 +15,8 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean;
   authSub$: Subscription;
 
+  newUser: User;
+
   constructor(private coingeckoService: CoingeckoService, private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -25,6 +28,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authSub$ = this.authService.changeOnAuth.subscribe(is => {
       this.isAuthenticated = is;
     });
+
+    this.authService.createUser();
+    // console.log(this.authService.userLogged);
   }
 
   onCoinSelected(coin: string): void {

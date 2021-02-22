@@ -1,7 +1,8 @@
 import { Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { TUI_DEFAULT_STRINGIFY } from '@taiga-ui/cdk';
 import { Subscription } from 'rxjs';
-import { CoinData } from '../shared/interfaces';
+import { CoinData, TrendyCoins, UserAction } from '../shared/interfaces';
+import { AuthService } from '../shared/services/auth.service';
 import { CoingeckoService } from '../shared/services/coingecko.service';
 
 @Component({
@@ -17,28 +18,49 @@ export class ExploreComponent implements OnInit, OnDestroy {
   yHeight: number;
   yMinHeight: number;
 
+  model = '';
+
   subCoinData$: Subscription;
   subLoadingCoinData$: Subscription;
 
+  trendyCoins: TrendyCoins[] = [];
+
   readonly stringify = TUI_DEFAULT_STRINGIFY;
 
-  constructor(private coingeckoService: CoingeckoService) {}
+  constructor(private coingeckoService: CoingeckoService, private auth: AuthService) {}
 
   ngOnInit(): void {
-
-    this.coingeckoService.fetchCryptoTrending().subscribe(r => {
-      console.log(r);
+    this.coingeckoService.fetchCryptoTrending().subscribe(({ coins }) => {
+      coins.map(({item: { id, name, score, symbol, market_cap_rank, large }}) => {
+        this.trendyCoins.push({
+          id,
+          name,
+          score,
+          symbol,
+          marketCapRank: market_cap_rank,
+          imgLarge: large
+        });
+      });
     });
 
     this.subCoinData$ = this.coingeckoService.getDetailCoinData().subscribe(coin => {
+      const { price } = coin.market_data.sparkline_7d;
       if (coin) {
         this.coinData = coin;
-        this.yHeight = this.coinData.market_data.sparkline_7d.price[0];
-        this.yMinHeight = this.coinData.market_data.sparkline_7d.price[0];
-        this.value = this.coinData.market_data.sparkline_7d.price.map((v, i) => {
+        this.yHeight = price[0];
+        this.yMinHeight = price[0];
+        this.value = price.map((v: number, i: number) => {
           if (this.yHeight < v)  { this.yHeight = v; }
           if (this.yMinHeight > v)  { this.yMinHeight = v; }
           return [i, v];
+        });
+
+        this.auth.addActionToUser({
+          id: (new Date()).toString(),
+          coinImg: this.coinData.image.large,
+          coinId: this.coinData.id,
+          timestamp: new Date(),
+          action: UserAction.Seen
         });
       }
     });
@@ -48,8 +70,14 @@ export class ExploreComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  exploreCertainCoin(coinId: string): void {
+    this.coingeckoService.fetchDetailCoinData(coinId);
+  }
+
   ngOnDestroy(): void {
     this.subCoinData$.unsubscribe();
     this.subLoadingCoinData$.unsubscribe();
   }
+
 }

@@ -48,9 +48,9 @@ tui-avatar {
   font: var(--tui-font-text-s);
 }
 
-
 .current_price {
   font-size: 1.2rem;
+  margin-top:-10px;
 }
 
 .date_high_low {
@@ -61,12 +61,12 @@ tui-avatar {
   margin: 1rem;
 }
 
-.search {
+.search, .actions {
   cursor: pointer;
   box-shadow: 0 0 0 rgba(236, 205, 93, 0.4);
   animation: pulse 2s infinite;
 }
-.search:hover {
+.search:hover, .actions:hover {
   animation: none;
 }
 
@@ -115,3 +115,4 @@ tui-money {
       box-shadow: 0 0 0 0 rgba(204,169,44, 0);
   }
 }
+

@@ -1,3 +1,24 @@
+export enum UserAction { Like, Dislike, Fav, Seen }
+
+export interface ConcreteAction {
+  id: string;
+  coinId: string;
+  coinImg: string;
+  action: UserAction;
+  timestamp: Date;
+}
+
+export interface User {
+  email: string;
+  password: string;
+  actions: Array<ConcreteAction>;
+  leaguesCreated?: any;
+  leaguesJoined?: any;
+  portfolio?: any;
+  settings?: any;
+  lastLogin?: Date;
+}
+
 export interface CoinData {
   id: string;
   name: string;
@@ -26,12 +47,11 @@ export interface OverallMarketStats {
   marketCapChangePercent: number;
 }
 
-// interface CoinGeckoResponse {
-//   id: string;
-//   symbol: string;
-//   name: string;
-//   image: string;
-//   current_price: number;
-//   market_cap: number;
-//   market_cap_rank: number;
-// }
+export interface TrendyCoins {
+  id: string;
+  name: string;
+  score: number;
+  marketCapRank: number;
+  symbol: string;
+  imgLarge: string;
+}

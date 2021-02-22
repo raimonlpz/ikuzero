@@ -6,9 +6,7 @@
   margin-left: 50%;
   transform: translateX(-50%);
 }
-.coin-logo {
-  width: min-content;
-}
+
 
 
 .sparkline {
@@ -44,7 +42,7 @@
   width: 290px;
   max-height: 390px;
   min-height: min-content;
-  border: .8px solid var(--tui-base-09);
+  /* border: .8px solid var(--tui-base-09); */
   border-radius: 1rem;
   line-height: 1.5rem;
   font-size: .9rem;
@@ -66,3 +64,24 @@
   width: 50%;
 }
 
+.trendy-coin {
+  transition: all 1s;
+}
+
+.trendy-coin:hover {
+  transform: translateY(20%);
+}
+
+.tag {
+  background-color: #454e58;
+}
+
+.editor {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 50%;
+  overflow: hidden;
+  transform: translateX(-50%);
+  max-height: 300px;
+  width: 350px;
+}

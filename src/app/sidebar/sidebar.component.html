@@ -41,7 +41,7 @@
 
       <tui-accordion [rounded]="false">
           <tui-accordion-item borders="top-bottom" *ngFor="let r of res" [size]="'s'">
-            <div class="crypto-name">
+            <tui-island class="crypto-name" [hoverable]="true" style="padding-left: .5rem;margin:0">
                 <tui-avatar
                     class="tui-space_top-1"
                     [avatarUrl]="r.image"
@@ -49,35 +49,41 @@
                     [rounded]="true"
                 ></tui-avatar>
                 <p>{{r.name}}</p>
-              </div>
+            </tui-island>
 
               <ng-template tuiAccordionItemContent>
-                <div style="display: flex; justify-content: space-evenly; margin-bottom:.5rem;">
+                <div style="display: flex; justify-content: space-evenly; margin-bottom:.5rem;" [hoverable]="true">
                   <tui-marker-icon
+                  class="actions"
                   mode="error"
-                  style="padding: 0; margin:0;"
+                  style="padding: 0; margin:0;cursor: pointer;"
                   size="xs"
                   src="tuiIconDislikeLarge"
+                  (click)="onCoinSelectedForAction(r.id, 'dislike', r.image)"
                   ></tui-marker-icon>
 
                   <tui-marker-icon
+                  class="actions"
                   mode="success"
-                  style="padding: 0; margin:0;"
+                  style="padding: 0; margin:0;cursor: pointer;"
                   size="xs"
                   src="tuiIconLikeLarge"
+                  (click)="onCoinSelectedForAction(r.id, 'like', r.image)"
                   ></tui-marker-icon>
 
                   <tui-marker-icon
+                  class="actions"
                   mode="warning"
-                  style="padding: 0; margin:0;"
+                  style="padding: 0; margin:0;cursor: pointer;"
                   size="xs"
                   src="tuiIconStarLarge"
+                  (click)="onCoinSelectedForAction(r.id, 'fav', r.image)"
                   ></tui-marker-icon>
 
                   <tui-marker-icon
                   class="search"
                   mode="primary"
-                  style="padding: 0; margin:0;"
+                  style="padding: 0; margin:0;cursor: pointer;"
                   size="xs"
                   src="tuiIconShowLarge"
                   (click)="onCoinSelectedForDetailView(r.id)"
@@ -89,13 +95,13 @@
                   <tui-line-clamp
                       [content]="content"
                       [lineHeight]="18"
-                      [linesLimit]="5"
+                      [linesLimit]="4"
                   ></tui-line-clamp>
                 </tui-island>
-                <ng-template #content>
-                    <div class="hint" style="text-align: center;">
+                <ng-template #content >
+                    <div class="hint" style="text-align: center; margin-top:0" [hoverable]="true">
                       <ol>
-                        <li >
+                        <li>
                             <tui-money class="current_price" [value]="r.current_price" [currency]="value"> </tui-money>
                             &nbsp; &nbsp;
                             <tui-money *ngIf="r.price_change_percentage_24h !== null" class="current_price" [value]="r.price_change_percentage_24h" [colored]="true" currency="%"> </tui-money>
@@ -104,11 +110,11 @@
                         <li>
                           <span class="label-island">Market Cap: </span> <tui-money [value]="r.market_cap" [currency]="value"> </tui-money>
                         </li>
-                        <hr style="margin:.3rem; margin-left:20%;margin-right:20%"/>
+                        <!-- <hr style="margin:.3rem; margin-left:20%;margin-right:20%"/> -->
                         <li>
                           <span class="label-island">Circulating Supply: </span> <span style="font-size: .7rem;">{{(r.circulating_supply).toFixed(0)}}</span>
                         </li>
-                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
+                        <!-- <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/> -->
                         <li >
                           <span class="label-island">All-Time High: </span>
                             <tui-money [value]="r.ath" [currency]="value"></tui-money> / <tui-money [value]="r.ath_change_percentage" [colored]="true" currency="%"></tui-money>
@@ -116,7 +122,7 @@
                               {{ r.ath_date | date }}
                             </div>
                         </li>
-                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
+                        <!-- <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/> -->
                         <li>
                           <span class="label-island">All-Time Low: </span>
                             <tui-money [value]="r.atl" [currency]="value"></tui-money> / <tui-money [value]="r.atl_change_percentage" [colored]="true" currency="%"></tui-money>
@@ -124,12 +130,12 @@
                               {{ r.atl_date | date }}
                             </div>
                         </li>
-                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
+                        <!-- <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/> -->
                         <li *ngIf="r.low_24h !== null">
                           <span class="label-island">24h Low / 24h High: </span>
                             <tui-money [value]="r.low_24h" [currency]="value"></tui-money> / <tui-money [value]="r.high_24h" [currency]="value"></tui-money>
                         </li>
-                        <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/>
+                        <!-- <hr style="margin:.3rem;margin-left:20%;margin-right:20%"/> -->
                         <li>
                           <span class="label-island">24 Hour Trading Vol: </span>
                             <tui-money [value]="r.total_volume" [currency]="value"></tui-money>

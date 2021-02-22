@@ -1,1 +1,68 @@
-<p>favorite works!</p>
+<div class="fav-container" style="margin-top:1rem;margin-bottom:1rem;">
+  <tui-island class="favs-content" [hoverable]="true" style="text-align: center;">
+    <h3 class="tui-text_h5" >
+      ⭐ Favorites
+    </h3>
+    <ng-container *ngIf="favCoins.length > 0">
+      <tui-scrollbar class="table-box">
+        <tui-island [hoverable]="true">
+        <table class="tui-table home-table">
+
+          <tbody>
+              <tr class="tui-table__tr">
+                  <th class="tui-table__th">#</th>
+                  <th class="tui-table__th">Coin</th>
+                  <th class="tui-table__th">Symbol</th>
+                  <th class="tui-table__th">Price</th>
+                  <th class="tui-table__th">1h</th>
+                  <th class="tui-table__th">24h</th>
+                  <th class="tui-table__th">7d</th>
+                  <th class="tui-table__th">24h Volume</th>
+                  <th class="tui-table__th">Mkt Cap</th>
+                  <th class="tui-table__th">Last 7 Days</th>
+
+              </tr>
+              <tr class="tui-table__tr" *ngFor="let c of favCoins">
+                <td class="tui-table__td row-el" >{{c.market_cap_rank}}</td>
+                <td class="tui-table__td row-el"  style="display:flex; height:max-content;">
+                  <tui-avatar class="tui-space_top-1" [avatarUrl]="c.image.small" size="xs" [rounded]="true" style="margin-right:.5rem;"></tui-avatar>
+                  {{c.name}}
+                </td>
+                <td class="tui-table__td row-el" >{{c.symbol.toUpperCase()}}</td>
+                <td class="tui-table__td row-el" >{{c.market_data.current_price.usd}}</td>
+                <td class="tui-table__td row-el" >{{c.name}}</td>
+                <td class="tui-table__td row-el" >{{c.name}}</td>
+                <td class="tui-table__td row-el" >{{c.name}}</td>
+                <td class="tui-table__td row-el" >{{c.name}}</td>
+                <td class="tui-table__td row-el" >{{c.name}}</td>
+                <td class="tui-table__td row-el" >{{c.name}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </tui-island>
+        </tui-scrollbar>
+    </ng-container>
+  </tui-island>
+  <tui-island class="myactivity-content" [hoverable]="true" style="text-align: center;">
+    <h3 class="tui-text_h5" >
+      🤺 Main Activity
+    </h3>
+    <tui-island *ngFor="let a of actions" [hoverable]="true">
+        <div class="action-date tui-text_body-xs" style="color: var(--tui-link);">{{a.timestamp | date: 'MMM d, y, h:mm:ss a' }}</div>
+        <span class="action-status tui-text_body-s" [style]="addStyleBg(a.action)">{{buildActionStatus(a.action, a.coinId)}} 	<tui-avatar style="display:inline-block" class="tui-space_top-1" size="s" [rounded]="true" [avatarUrl]="a.coinImg"></tui-avatar></span>
+
+        <button
+	        tuiIconButton
+	        type="button"
+	        class="tui-space_right-3 tui-space_bottom-3"
+	        icon="tuiIconCloseLarge"
+          appearance="secondary"
+          size="xs"
+	        style="position: absolute; right:0; top:50%; transform: translateY(-50%)"
+          (click)="deleteActionFromDashboard(a.id)"
+	      ></button>
+    </tui-island>
+  </tui-island>
+
+
+</div>

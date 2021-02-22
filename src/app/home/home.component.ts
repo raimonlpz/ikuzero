@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   yHeight: number;
   chartCoinsDataIsLoading = true;
 
-  length = 60;
+  length = 120;
   index = 0;
 
   overallMarket: OverallMarketStats;
@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
         dominanceEthPercent: r.data.market_cap_percentage.eth,
         marketCapChangePercent: r.data.market_cap_change_percentage_24h_usd,
       };
-      console.log(this.overallMarket);
     });
   }
 
@@ -85,7 +84,6 @@ export class HomeComponent implements OnInit {
   }
 
   exploreCertainCoin(coinId: string): void {
-    // console.log(coinId);
     this.coingeckoService.fetchDetailCoinData(coinId);
     this.router.navigate(['/explore']);
   }

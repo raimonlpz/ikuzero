@@ -14,7 +14,7 @@ export class CoingeckoService {
   fetchSidebarCryptoData(
     currency: string,
     page: number = 1,
-    xpage: number = 50
+    xpage: number = 30
   ): Observable<Array<{}>> {
     return this.http
       .get<Array<{}>>(
@@ -27,7 +27,7 @@ export class CoingeckoService {
   fetchTableCryptoData(page: number = 1): Observable<Array<any>> {
       return this.http
         .get<Array<any>>(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${
+          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=25&page=${
             page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d%2C14d%2C30d%2C200d%2C1y`
         );
   }
@@ -58,6 +58,13 @@ export class CoingeckoService {
 
   getDatailCoinDataIsLoading(): Observable<boolean> {
     return this.detailCoinDataIsLoading.asObservable();
+  }
+
+  fetchCoinForFavsDashboard(coin: string): Observable<any> {
+    return this.http
+    .get<Array<{}>>(
+      `https://api.coingecko.com/api/v3/coins/${coin}?sparkline=true`
+    );
   }
 
 

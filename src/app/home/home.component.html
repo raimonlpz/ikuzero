@@ -5,7 +5,7 @@
 	    [overlay]="true"
 >
 
-<div *ngIf="overallMarket" icon="tuiIconStarLarge" class="overall-wrapper">
+<div *ngIf="overallMarket" class="overall-wrapper">
     <div class="overall-el">Coins: <span class="overall-el-highlight">{{overallMarket.activeCoins}}</span></div>
     <div class="overall-el">Markets: <span class="overall-el-highlight">{{overallMarket.activeMarkets}}</span></div>
     <div class="overall-el">Market Cap: <span class="overall-el-highlight">{{overallMarket.marketCapChangePercent | number : '1.2-2'}}%</span></div>

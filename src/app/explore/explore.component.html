@@ -1,5 +1,27 @@
 
-  <div class="tui-container_fullwidth container">
+<tui-scrollbar style="width: max-content;max-width:95vw; margin-top: .4rem; margin-left: 50%; transform: translateX(-50%)">
+  <tui-island size="xs" style="display: flex; padding: .5rem; text-align: center;" [hoverable]="true">
+    <tui-tag
+	    class="tag"
+	    size="l"
+      style="background-color: #44c596; color: black"
+	    status="custom"
+	    value="🔥 Trendy Coins"
+	  ></tui-tag>
+    <div class="tui-island__content" *ngFor="let t of trendyCoins" style="margin-right: 1.5rem;" (click)="exploreCertainCoin(t.id)">
+        <figure class="tui-island__figure trendy-coin">
+            <tui-avatar [avatarUrl]="t.imgLarge" size="s" style="margin-right:.3rem" [rounded]="true"></tui-avatar>
+            <div>
+              <div class="tui-text_body-xs"><span style="font-weight: bold; color:#6788ff">{{t.symbol}} </span> #{{t.marketCapRank}}</div>
+          </div>
+        </figure>
+    </div>
+  </tui-island>
+
+</tui-scrollbar>
+
+
+<div class="tui-container_fullwidth container">
     <tui-loader
       class="tui-space_right-2"
       [showLoader]="isLoading"
@@ -43,5 +65,12 @@
     </tui-loader>
   </div>
 
-
+	<tui-editor
+      [tools]="['undo', 'fontsize', 'bold', 'underline', 'italic', 'quote', 'link', 'image', 'foreColor']"
+	    i18n
+	    class="editor"
+	    [(ngModel)]="model"
+	>
+	    Leave a comment
+	</tui-editor>
 

@@ -26,13 +26,12 @@
   </tui-tabs-with-more>
 
   <div>
-    <!-- <app-explore [coinData]="coinData | async" class="explore"></app-explore> -->
     <app-sidebar (coinSelection)="onCoinSelected($event)" class="sidebar" *ngIf="isAuthenticated" style="position: fixed;z-index:200;"></app-sidebar>
     <router-outlet class="container_full"></router-outlet>
     <div class="container notifications" *ngIf="isAuthenticated" style="position: fixed;">
       <div class="tui-row">
         <div class="">
-          <tui-island size="s" textAlign="center" [hoverable]="true">
+          <tui-island size="xs" textAlign="center" [hoverable]="true">
               <div class="tui-island__content">
                   <figure class="tui-island__figure">
                     <tui-badged-content
@@ -45,17 +44,12 @@
                       <tui-avatar class="tui-space_top-1" [avatarUrl]="'https://avatars.dicebear.com/4.5/api/avataaars/eweweewwwwweewweewewwweewdwe.svg'" [rounded]="true"></tui-avatar>
                     </tui-badged-content>
                   </figure>
-                  <div>
-                      <!-- <h3 class="tui-island__title">@raimonlpez97</h3> -->
-                      <p class="tui-island__paragraph">
-                          Hi, Rai!
-                      </p>
-                  </div>
               </div>
           </tui-island>
         </div>
       </div>
     </div>
   </div>
+  <app-footer></app-footer>
 </tui-root>
 

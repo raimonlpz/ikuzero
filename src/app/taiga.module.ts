@@ -122,7 +122,7 @@ import {
   TuiMoneyModule,
 } from '@taiga-ui/addon-commerce';
 
-import {TuiColorPickerModule} from '@taiga-ui/addon-editor';
+import {TuiColorPickerModule, TuiEditorModule } from '@taiga-ui/addon-editor';
 
 import {
   TuiElasticStickyModule,
@@ -261,6 +261,7 @@ import {
     TuiFormatNumberPipeModule,
     TuiFormatPhonePipeModule,
     TuiMapperPipeModule,
+    TuiEditorModule
   ],
   exports: [
     TuiThemeNightModule,
@@ -381,6 +382,7 @@ import {
     TuiFormatNumberPipeModule,
     TuiFormatPhonePipeModule,
     TuiMapperPipeModule,
+    TuiEditorModule
   ],
   providers: [
     {
