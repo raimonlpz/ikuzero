@@ -3,6 +3,12 @@
     <h3 class="tui-text_h5" >
       ⭐ Favorites
     </h3>
+    <tui-loader
+	    class="inline-flex tui-space_right-2"
+	    [showLoader]="favCoinsDashboardIsLoading"
+	    [inheritColor]="true"
+	    [overlay]="true"
+    >
     <ng-container *ngIf="favCoins.length > 0">
       <tui-scrollbar class="table-box">
         <tui-island [hoverable]="true">
@@ -22,7 +28,7 @@
                   <th class="tui-table__th">Last 7 Days</th>
 
               </tr>
-              <tr class="tui-table__tr" *ngFor="let c of favCoins">
+              <tr class="tui-table__tr" *ngFor="let c of favCoins" (click)="exploreCertainCoin(c.id)">
                 <td class="tui-table__td row-el" >{{c.market_cap_rank}}</td>
                 <td class="tui-table__td row-el"  style="display:flex; height:max-content;">
                   <tui-avatar class="tui-space_top-1" [avatarUrl]="c.image.small" size="xs" [rounded]="true" style="margin-right:.5rem;"></tui-avatar>
@@ -42,12 +48,13 @@
         </tui-island>
         </tui-scrollbar>
     </ng-container>
+  </tui-loader>
   </tui-island>
   <tui-island class="myactivity-content" [hoverable]="true" style="text-align: center;">
     <h3 class="tui-text_h5" >
       🤺 Main Activity
     </h3>
-    <tui-island *ngFor="let a of actions" [hoverable]="true">
+    <tui-island *ngFor="let a of actions" [hoverable]="true" (click)="exploreCertainCoin(a.coinId)">
         <div class="action-date tui-text_body-xs" style="color: var(--tui-link);">{{a.timestamp | date: 'MMM d, y, h:mm:ss a' }}</div>
         <span class="action-status tui-text_body-s" [style]="addStyleBg(a.action)">{{buildActionStatus(a.action, a.coinId)}} 	<tui-avatar style="display:inline-block" class="tui-space_top-1" size="s" [rounded]="true" [avatarUrl]="a.coinImg"></tui-avatar></span>
 

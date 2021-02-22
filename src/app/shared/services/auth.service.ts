@@ -10,6 +10,7 @@ export class AuthService {
   private user: User;
 
   changeOnAuth = new Subject<boolean>();
+  userActions = new Subject<Array<ConcreteAction>>();
 
   constructor() { }
 
@@ -25,6 +26,10 @@ export class AuthService {
     return this.user;
   }
 
+  // get userActionsForDashboard(): Array<ConcreteAction> {
+  //   return this.user.actions;
+  // }
+
   addActionToUser(UAction: ConcreteAction): void {
     let actionIsRepeated = false;
     this.user.actions.forEach(a => {
@@ -33,9 +38,15 @@ export class AuthService {
       }
     });
     if (!actionIsRepeated) {
-      this.user.actions.push(UAction);
-      window.localStorage.setItem('user-actions', JSON.stringify(this.userLogged));
+      this.user.actions = [...this.user.actions, UAction];
+      // window.localStorage.setItem('user-actions', JSON.stringify(this.userLogged));
+      this.userActions.next(this.user.actions);
     }
+  }
+
+  deleteActionFromUser(actionId: string): void {
+    this.user.actions = [...this.user.actions.filter(action => action.id !== actionId)];
+    this.userActions.next(this.user.actions);
   }
 
   get isAuth(): boolean {
