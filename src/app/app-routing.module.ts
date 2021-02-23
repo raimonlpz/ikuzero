@@ -10,13 +10,13 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
-  { path: 'hello', component: LandingComponent },
+  { path: 'hello', component: HomeComponent },
   { path: 'explore', component: ExploreComponent },
   { path: 'portfolio', component: PortfolioComponent },
   { path: 'leagues', component: LeaguesComponent },
   { path: 'favorite', component: FavoriteComponent },
   { path: 'settings', component: SettingsComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: LandingComponent }
   // { path: '', component: WelcomeComponent, canActivate: [AuthGuard] },
   // { path: 'training', loadChildren: () => import('./training/training.module').then(m => m.TrainingModule), canLoad: [AuthGuard]},
 ];

@@ -29,6 +29,11 @@
   align-items: center;
 }
 
+.actions {
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+}
+
 .crypto-name {
   margin: 0;
   padding: 0;

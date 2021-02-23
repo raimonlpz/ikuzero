@@ -96,6 +96,32 @@ export class FavoriteComponent implements OnInit, OnDestroy {
     this.router.navigate(['/explore']);
   }
 
+  getHeightForSparklineChart(a: Array<number>): number {
+    let res: number = a[0];
+    a.map((n: number) => {
+      if ( res < n ) {
+        res = n;
+      }
+    });
+    return res;
+  }
+
+  getStartingHeightForSparklineChart(a: Array<number>): number {
+    let res: number = a[0];
+    a.map((n: number) => {
+      if (res > n) {
+        res = n;
+      }
+    });
+    return res;
+  }
+
+  getValueArrayForSparkline(a: Array<number>): Array<Array<number>> {
+    return a.map((n: number, i: number) => {
+      return [i, n];
+    });
+  }
+
 
   ngOnDestroy(): void {
     this.userActionsSub$.unsubscribe();

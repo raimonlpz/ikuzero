@@ -82,13 +82,13 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   onLogin(): void {
     this.authService.isAuth = true;
-    this.router.navigate(['']);
+    this.router.navigate(['/hello']);
     // console.log(this.loginForm.valueChanges);
   }
 
   onSignUp(): void {
     this.authService.isAuth = true;
-    this.router.navigate(['']);
+    this.router.navigate(['/hello']);
     // console.log(this.signupForm.valueChanges);
   }
 

@@ -2,7 +2,7 @@
 <tui-root >
 
   <tui-tabs-with-more class="tabs-nav" [itemsLimit]="4" [(activeItemIndex)]="activeItemIndex" *ngIf="isAuthenticated">
-    <a *tuiTab tuiTab routerLink="/" routerLinkActive [routerLinkActiveOptions]="{exact: true}">
+    <a *tuiTab tuiTab routerLink="/hello" routerLinkActive [routerLinkActiveOptions]="{exact: true}">
       <tui-svg src="tuiIconAlignJustifyLarge" class="tui-space_right-2"></tui-svg> Home
     </a>
     <a *tuiTab tuiTab routerLink="/explore" routerLinkActive (click)="onCoinSelected(coinSelected)">
@@ -20,7 +20,7 @@
     <a *tuiTab tuiTab routerLink="/settings" routerLinkActive >
       <tui-svg src="tuiIconSettings" class="tui-space_right-2"></tui-svg> Settings
     </a>
-    <a *tuiTab tuiTab routerLink="/hello"  routerLinkActive >
+    <a *tuiTab tuiTab routerLink="/"  routerLinkActive [routerLinkActiveOptions]="{exact: true}">
       <tui-svg src="tuiIconLogoutLarge" class="tui-space_right-2"></tui-svg> Logout
     </a>
   </tui-tabs-with-more>

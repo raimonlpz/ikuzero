@@ -35,18 +35,18 @@
             <th class="tui-table__th">Last 7 Days</th>
         </tr>
         <tr class="tui-table__tr" *ngFor="let c of coins; let i = index">
-              <td class="tui-table__td row-el" style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.market_cap_rank ? c.market_cap_rank  : '-'}}</td>
-              <td class="tui-table__td row-el" style="display:flex; height:max-content; font-size: .8rem" (click)="exploreCertainCoin(c.id)">
+              <td class="tui-table__td row-el" style="font-size: .85rem" (click)="exploreCertainCoin(c.id)">{{c.market_cap_rank ? c.market_cap_rank  : '-'}}</td>
+              <td class="tui-table__td row-el" style="display:flex; height:max-content; font-size: .85rem" (click)="exploreCertainCoin(c.id)">
                 <tui-avatar class="tui-space_top-1" [avatarUrl]="c.image" size="xs" [rounded]="true" style="margin-right:.5rem;"></tui-avatar>
                 {{c.name}}
               </td>
-              <td class="tui-table__td row-el"  style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.symbol.toUpperCase()}}</td>
-              <td class="tui-table__td row-el" style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.current_price}}$</td>
-              <td class="tui-table__td row-el" style="font-size: .8rem" [style]="c.price_change_percentage_1h_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_1h_in_currency ? (c.price_change_percentage_1h_in_currency | number : '1.2-2') : '- '}}%</td>
-              <td class="tui-table__td row-el" style="font-size: .8rem" [style]="c.price_change_percentage_24h_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_24h_in_currency ? (c.price_change_percentage_24h_in_currency | number : '1.2-2') : '- '}}%</td>
-              <td class="tui-table__td row-el" style="font-size: .8rem" [style]="c.price_change_percentage_7d_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_7d_in_currency ? (c.price_change_percentage_7d_in_currency | number : '1.2-2') : '- '}}%</td>
-              <td class="tui-table__td row-el"style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.total_volume}}$</td>
-              <td class="tui-table__td row-el" style="font-size: .8rem" (click)="exploreCertainCoin(c.id)">{{c.market_cap}}$</td>
+              <td class="tui-table__td row-el"  style="font-size: .85rem" (click)="exploreCertainCoin(c.id)">{{c.symbol.toUpperCase()}}</td>
+              <td class="tui-table__td row-el" style="font-size: .85rem" (click)="exploreCertainCoin(c.id)">{{c.current_price}}$</td>
+              <td class="tui-table__td row-el" style="font-size: .85rem" [style]="c.price_change_percentage_1h_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_1h_in_currency ? (c.price_change_percentage_1h_in_currency | number : '1.2-2') : '- '}}%</td>
+              <td class="tui-table__td row-el" style="font-size: .85rem" [style]="c.price_change_percentage_24h_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_24h_in_currency ? (c.price_change_percentage_24h_in_currency | number : '1.2-2') : '- '}}%</td>
+              <td class="tui-table__td row-el" style="font-size: .85rem" [style]="c.price_change_percentage_7d_in_currency > 0 ? 'color:#44c596' : 'color:#ff8c67'" (click)="exploreCertainCoin(c.id)">{{c.price_change_percentage_7d_in_currency ? (c.price_change_percentage_7d_in_currency | number : '1.2-2') : '- '}}%</td>
+              <td class="tui-table__td row-el"style="font-size: .85rem" (click)="exploreCertainCoin(c.id)">{{c.total_volume}}$</td>
+              <td class="tui-table__td row-el" style="font-size: .85rem" (click)="exploreCertainCoin(c.id)">{{c.market_cap}}$</td>
               <td class="tui-table__td row-el" (click)="exploreCertainCoin(c.id)">
                 <tui-axes class="axes" [verticalLines]="7" [horizontalLines]="1" style="width: 100px; height: 30px; color: #bc71c9;">
                   <tui-line-chart

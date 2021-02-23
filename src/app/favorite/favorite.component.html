@@ -29,19 +29,31 @@
 
               </tr>
               <tr class="tui-table__tr" *ngFor="let c of favCoins" (click)="exploreCertainCoin(c.id)">
-                <td class="tui-table__td row-el" >{{c.market_cap_rank}}</td>
-                <td class="tui-table__td row-el"  style="display:flex; height:max-content;">
+                <td class="tui-table__td row-el" style="font-size: .9rem" >{{c.market_cap_rank}}</td>
+                <td class="tui-table__td row-el"  style="display:flex; height:max-content; font-size: .9rem">
                   <tui-avatar class="tui-space_top-1" [avatarUrl]="c.image.small" size="xs" [rounded]="true" style="margin-right:.5rem;"></tui-avatar>
                   {{c.name}}
                 </td>
-                <td class="tui-table__td row-el" >{{c.symbol.toUpperCase()}}</td>
-                <td class="tui-table__td row-el" >{{c.market_data.current_price.usd}}</td>
-                <td class="tui-table__td row-el" >{{c.name}}</td>
-                <td class="tui-table__td row-el" >{{c.name}}</td>
-                <td class="tui-table__td row-el" >{{c.name}}</td>
-                <td class="tui-table__td row-el" >{{c.name}}</td>
-                <td class="tui-table__td row-el" >{{c.name}}</td>
-                <td class="tui-table__td row-el" >{{c.name}}</td>
+                <td class="tui-table__td row-el" style="font-size: .9rem" >{{c.symbol.toUpperCase()}}</td>
+                <td class="tui-table__td row-el" style="font-size: .9rem">{{c.market_data.current_price.usd}}$</td>
+                <td class="tui-table__td row-el" style="font-size: .9rem" [style]="c.market_data.price_change_percentage_1h_in_currency.usd > 0 ? 'color:#44c596' : 'color:#ff8c67'" >{{c.market_data.price_change_percentage_1h_in_currency.usd | number : '1.2-2'}}%</td>
+                <td class="tui-table__td row-el" style="font-size: .9rem" [style]="c.market_data.price_change_percentage_24h_in_currency.usd > 0 ? 'color:#44c596' : 'color:#ff8c67'" >{{c.market_data.price_change_percentage_24h_in_currency.usd | number : '1.2-2'}}%</td>
+                <td class="tui-table__td row-el" style="font-size: .9rem" [style]="c.market_data.price_change_percentage_7d_in_currency.usd > 0 ? 'color:#44c596' : 'color:#ff8c67'" >{{c.market_data.price_change_percentage_7d_in_currency.usd | number : '1.2-2'}}%</td>
+                <td class="tui-table__td row-el" style="font-size: .9rem" >{{c.market_data.total_volume.usd}}$</td>
+                <td class="tui-table__td row-el" style="font-size: .9rem" >{{c.market_data.market_cap.usd}}$</td>
+                <td class="tui-table__td row-el" >
+                  <tui-axes class="axes" [verticalLines]="7" [horizontalLines]="1" style="width: 100px; height: 30px; color: #bc71c9;">
+                    <tui-line-chart
+                        [x]="0"
+                        [y]="getStartingHeightForSparklineChart(c.market_data.sparkline_7d.price) * .75"
+                        [width]="c.market_data.sparkline_7d.price.length - 1"
+                        [smoothingFactor]="90"
+                        [height]="getHeightForSparklineChart(c.market_data.sparkline_7d.price) * .75"
+                        color="pink"
+                        [value]="getValueArrayForSparkline(c.market_data.sparkline_7d.price)"
+                    ></tui-line-chart>
+                  </tui-axes>
+                </td>
               </tr>
             </tbody>
           </table>
