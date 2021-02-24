@@ -60,12 +60,17 @@ export class CoingeckoService {
     return this.detailCoinDataIsLoading.asObservable();
   }
 
-  fetchCoinForFavsDashboard(coin: string): Observable<any> {
+  fetchCoinForFavsDashboard(coin: string, sparkline: boolean = true): Observable<any> {
     return this.http
     .get<Array<{}>>(
-      `https://api.coingecko.com/api/v3/coins/${coin}?sparkline=true`
+      `https://api.coingecko.com/api/v3/coins/${coin}?sparkline=${sparkline}`
     );
   }
 
-
+  fetchCoinMarketChartForPortfolio(coin: string)
+    : Observable<{prices: Array<Array<number>>, name: string }> {
+    return this.http
+      .get<{prices: Array<Array<number>>, name: string }>(`https://api.coingecko.com/api/v3/coins/${
+              coin}/market_chart?vs_currency=usd&days=7`);
+  }
 }

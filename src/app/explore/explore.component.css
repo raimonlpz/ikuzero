@@ -54,7 +54,7 @@
 }
 
 
-.white-paper {
+/* .white-paper {
   margin: 2rem;
   display: flex;
   flex-direction: column;
@@ -62,7 +62,7 @@
 
 .white-paper img {
   width: 50%;
-}
+} */
 
 .trendy-coin {
   transition: all 1s;

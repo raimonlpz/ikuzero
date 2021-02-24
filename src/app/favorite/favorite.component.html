@@ -1,6 +1,6 @@
 <div class="fav-container" style="margin-top:1rem;margin-bottom:1rem;">
   <tui-island class="favs-content" [hoverable]="true" style="text-align: center;">
-    <h3 class="tui-text_h5" >
+    <h3 class="tui-text_h6" >
       ⭐ Favorites
     </h3>
     <tui-loader
@@ -11,7 +11,7 @@
     >
     <ng-container *ngIf="favCoins.length > 0">
       <tui-scrollbar class="table-box">
-        <tui-island [hoverable]="true">
+        <tui-island [hoverable]="true" style="width: max-content;">
         <table class="tui-table home-table">
 
           <tbody>
@@ -63,7 +63,7 @@
   </tui-loader>
   </tui-island>
   <tui-island class="myactivity-content" [hoverable]="true" style="text-align: center;">
-    <h3 class="tui-text_h5" >
+    <h3 class="tui-text_h6" >
       🤺 Main Activity
     </h3>
     <tui-island *ngFor="let a of actions" [hoverable]="true" (click)="exploreCertainCoin(a.coinId)">

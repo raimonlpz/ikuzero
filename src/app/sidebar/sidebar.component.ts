@@ -84,7 +84,7 @@ export class SidebarComponent implements OnInit {
     switch (action) {
       case 'dislike':
         this.auth.addActionToUser({
-          id: (new Date()).toString(),
+          id:  String(new Date().valueOf()),
           coinImg: img,
           coinId,
           timestamp: new Date(),
@@ -96,7 +96,7 @@ export class SidebarComponent implements OnInit {
         break;
       case 'like':
         this.auth.addActionToUser({
-          id: (new Date()).toString(),
+          id:  String(new Date().valueOf()),
           coinId,
           coinImg: img,
           timestamp: new Date(),
@@ -108,7 +108,7 @@ export class SidebarComponent implements OnInit {
         break;
       case 'fav':
         this.auth.addActionToUser({
-          id: (new Date()).toString(),
+          id:  String(new Date().valueOf()),
           coinId,
           coinImg: img,
           timestamp: new Date(),

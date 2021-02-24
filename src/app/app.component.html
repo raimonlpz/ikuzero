@@ -1,5 +1,6 @@
-<tui-theme-night></tui-theme-night>
-<tui-root >
+<div style="padding-bottom: 1rem; margin-bottom:-1rem;" [style]="darkModeToggling ? 'background-color: #1b1a1a' : '' ">
+<tui-theme-night *ngIf="darkModeToggling"></tui-theme-night>
+<tui-root style="min-height: 100vh;">
 
   <tui-tabs-with-more class="tabs-nav" [itemsLimit]="4" [(activeItemIndex)]="activeItemIndex" *ngIf="isAuthenticated">
     <a *tuiTab tuiTab routerLink="/hello" routerLinkActive [routerLinkActiveOptions]="{exact: true}">
@@ -28,8 +29,15 @@
   <div>
     <app-sidebar (coinSelection)="onCoinSelected($event)" class="sidebar" *ngIf="isAuthenticated" style="position: fixed;z-index:200;"></app-sidebar>
     <router-outlet class="container_full"></router-outlet>
-    <div class="container notifications" *ngIf="isAuthenticated" style="position: fixed;">
-      <div class="tui-row">
+    <div class="container notifications" [hoverable]="true" *ngIf="isAuthenticated" style="position: fixed;z-index:200">
+      <div style="text-align:center;font-size:1.2rem;margin-bottom:.5rem;">{{darkModeToggling ? '🌙': '☀️'}}</div>
+      <tui-toggle
+        class="tui-space_left-1"
+        [(ngModel)]="darkModeToggling"
+        size="l"
+        [showIcons]="true"
+      ></tui-toggle>
+      <!-- <div class="tui-row">
         <div class="">
           <tui-island size="xs" textAlign="center" [hoverable]="true">
               <div class="tui-island__content">
@@ -47,9 +55,10 @@
               </div>
           </tui-island>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <app-footer></app-footer>
 </tui-root>
 
+</div>

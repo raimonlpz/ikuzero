@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ConcreteAction, User, UserAction } from '../interfaces';
+import {
+  ConcreteAction,
+  Portfolio,
+  User,
+  UserAction,
+  PortfolioInvestmentAction
+} from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +17,7 @@ export class AuthService {
 
   changeOnAuth = new Subject<boolean>();
   userActions = new Subject<Array<ConcreteAction>>();
+  // portfolioMovements = new Subject<Array<PortfolioInvestmentAction>>();
 
   constructor() { }
 
@@ -18,7 +25,11 @@ export class AuthService {
     this.user = {
       email: 'raimonlpez@gmail.com',
       password: 'raimon123',
-      actions: []
+      actions: [],
+      portfolio: {
+        budget: 10_000_000,
+        investments: []
+      }
     };
   }
 
@@ -26,9 +37,21 @@ export class AuthService {
     return this.user;
   }
 
-  // get userActionsForDashboard(): Array<ConcreteAction> {
-  //   return this.user.actions;
-  // }
+  get portfolioUserData(): Portfolio {
+    return this.user.portfolio;
+  }
+
+  registerPortfolioUserAction(coinId: string, amountCash: number): void {
+    if (this.user.portfolio.budget >= amountCash) {
+      this.user.portfolio.investments.push({
+        investmentId: String(new Date().valueOf()),
+        timestamp: new Date(),
+        coinId,
+        amountCashInUsd: amountCash
+      });
+      this.user.portfolio.budget -= amountCash;
+    }
+  }
 
   addActionToUser(UAction: ConcreteAction): void {
     let actionIsRepeated = false;

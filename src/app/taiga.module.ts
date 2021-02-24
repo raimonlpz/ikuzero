@@ -108,6 +108,7 @@ import * as icons from '@taiga-ui/icons';
 import {
   TuiAxesModule,
   TuiBarChartModule,
+  TuiBarSetModule,
   TuiLineChartModule,
   TuiLineDaysChartModule,
   TuiPieChartModule,
@@ -261,7 +262,8 @@ import {
     TuiFormatNumberPipeModule,
     TuiFormatPhonePipeModule,
     TuiMapperPipeModule,
-    TuiEditorModule
+    TuiEditorModule,
+    TuiBarSetModule
   ],
   exports: [
     TuiThemeNightModule,
@@ -382,7 +384,8 @@ import {
     TuiFormatNumberPipeModule,
     TuiFormatPhonePipeModule,
     TuiMapperPipeModule,
-    TuiEditorModule
+    TuiEditorModule,
+    TuiBarSetModule
   ],
   providers: [
     {

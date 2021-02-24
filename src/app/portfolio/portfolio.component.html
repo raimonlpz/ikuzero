@@ -1,1 +1,109 @@
-<p>portfolio works!</p>
+<tui-island [hoverable]="true" class="portfolio-container">
+  <h1 class="tui-text_body-m" style="text-align:center;">Current Budget: <span style="font-weight: bold;color:#6788ff">{{ portfolio.budget | number:'1.0':'en-US' }}$</span></h1>
+  <div class="form-container">
+
+    <div style="margin: 1rem;" class="cash-cont">
+      <tui-island [hoverable]="true">
+      <label tuiLabel [label]="'Select a Coin 💸'">
+      <tui-select
+          *tuiLet="items$"
+          class="b-form"
+          [tuiTextfieldLabelOutside]="true"
+          [(ngModel)]="coinValue"
+      >
+          <ng-template tuiDataList>
+              <tui-data-list *ngIf="items$ else loading">
+                  <button *ngFor="let item of items$" tuiOption [value]="item.id" (click)="calcUSDInCryptoUnits(); $event.stopPropagation()">
+                    <div style="justify-content: space-between; display:flex; flex-direction: row; width: 100%; font-size: .9rem; align-items: center;" >
+                      <div style="display:flex; flex-direction: row;" ><tui-avatar [avatarUrl]="item.image" [rounded]="true" [size]="'xs'" style="margin-right:1rem;"></tui-avatar>
+                        {{item.name}}
+                      </div>
+                      <div><p>{{item.current_price}}$</p></div>
+                    </div>
+                  </button>
+              </tui-data-list>
+          </ng-template>
+          <ng-template #loading>
+              <tui-loader class="tui-space_vertical-3 loader"></tui-loader>
+          </ng-template>
+      </tui-select>
+      </label>
+    </tui-island>
+    </div>
+
+
+    <div class="range-cont" style="margin: 1rem;">
+      <tui-island [hoverable]="true">
+        <label tuiLabel [label]="'Select Cash Amount 🤑'">
+          <tui-slider [formControl]="cashValue" [min]="0" [max]="10000" size="m" steps="1000" (click)="calcUSDInCryptoUnits()" (touchend)="calcUSDInCryptoUnits()"></tui-slider>
+          <tui-island [hoverable]="true" style="text-align:center;">
+            <div style="font-weight: bold;color:#6788ff">{{cashValue.value | number:'1.0':'en-US'  }}$</div>
+            <div style="font-size:.8rem;"> = {{USDInCryptoUnits}} u. ({{coinValue}})</div>
+          </tui-island>
+
+          </label>
+      </tui-island>
+
+    </div>
+  </div>
+  <div  style="text-align:center;">
+    <button
+    style="justify-content: center;"
+      tuiButton
+      type="button"
+      class="tui-space_right-3 tui-space_bottom-3"
+      appearance="outline"
+      (click)="pushMoneyToPortfolio()"
+      [disabled]="cashValue.value === 0"
+    >
+    <span style="font-weight: bold;color:#44c596"> Go!</span>
+    </button>
+  </div>
+
+  <tui-island class="coins-container" style="margin-bottom: 1rem;" [hoverable]="true" *ngIf="coinsInvestedInForResume.length > 0">
+    <tui-scrollbar class="box" style="height: 60px; width: 100%;">
+        <div [hoverable]="true" style="width:min-content; display:flex;">
+          <tui-checkbox-block size="s" *ngFor="let coin of coinsInvestResum"  [(ngModel)]="coinChecked[coin.id]" style="margin-right:.5rem;" (change)="filterCoinsToWatch()">
+            <div class="content-check">
+                <tui-avatar
+                    class="tui-space_right-3"
+                    i18n-text
+                    [avatarUrl]="coin.img"
+                    [text]="coin.coinSymbol"
+                    size="s"
+                    [rounded]="true"
+                ></tui-avatar>
+                <div>
+                    <div class="label"> {{coin.cashAmountUSD }}$ 💵</div>
+                    {{coin.coinSymbol.toUpperCase()}}
+                </div>
+            </div>
+          </tui-checkbox-block>
+      </div>
+    </tui-scrollbar>
+  </tui-island>
+
+  <tui-island class="cont-chart">
+  <tui-axes *ngIf="coinsInvestedInForResume.length > 0"
+    class="axes"
+    [verticalLines]="7"
+    [horizontalLines]="3"
+    [tuiLineChartHint]="hint"
+  >
+  <tui-line-chart
+      *ngFor="let value of values"
+      class="chart"
+      [filled]="true"
+      [x]="0"
+      [y]="getSm(value)"
+      [width]="168"
+      [height]="getHg(value)"
+      [value]="value"
+      [xStringify]="stringify"
+      [yStringify]="stringify"
+  ></tui-line-chart>
+</tui-axes>
+  </tui-island>
+</tui-island>
+
+

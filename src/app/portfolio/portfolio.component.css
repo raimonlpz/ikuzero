@@ -1,3 +1,73 @@
-* {
-  text-align: center;
+.portfolio-container {
+  margin-top: 2rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
 }
+
+.form-container {
+  border-radius: 5px;
+  display: flex;
+}
+
+.content-check {
+    padding: .4rem;
+    display: flex;
+    align-items: center;
+    height: max-content;
+}
+
+
+.avatar {
+    flex-shrink: 0;
+}
+
+.name {
+    flex-shrink: 1;
+    font-weight: bold;
+}
+
+.item {
+  margin-right: 1rem;
+}
+
+.range-cont, .cash-cont {
+  width:50%;
+}
+
+
+@media (max-width: 800px) {
+  .portfolio-container {
+    width: 92%;
+  }
+  .form-container {
+    flex-direction: column;
+  }
+
+  .range-cont, .cash-cont {
+    width:90%;
+  }
+
+}
+
+/* .cont-chart {
+
+} */
+
+.axes {
+  height: 300px;
+  width: 100%;
+  /* background: rgb(32,31,31);
+  background: linear-gradient(90deg, rgba(32,31,31,1) 0%, rgba(27,26,26,1) 100%); */
+}
+
+.chart {
+  position: absolute;
+  /* color: #ffffff; */
+  color: var(--tui-negative);
+  /* color: #fa838d; */
+  /*   color: #4dc3f7; */
+}
+
+
+

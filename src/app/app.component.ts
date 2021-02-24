@@ -15,11 +15,15 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean;
   authSub$: Subscription;
 
+  darkModeToggling: boolean;
+
   newUser: User;
 
   constructor(private coingeckoService: CoingeckoService, private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.darkModeToggling = true;
+
     this.coinSelected = 'ethereum';
     this.onCoinSelected(this.coinSelected);
     // this.isAuthenticated = this.authService.isAuth;

@@ -56,7 +56,7 @@ export class ExploreComponent implements OnInit, OnDestroy {
         });
 
         this.auth.addActionToUser({
-          id: (new Date()).toString(),
+          id:  String(new Date().valueOf()),
           coinImg: this.coinData.image.large,
           coinId: this.coinData.id,
           timestamp: new Date(),

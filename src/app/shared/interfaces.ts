@@ -8,13 +8,25 @@ export interface ConcreteAction {
   timestamp: Date;
 }
 
+export interface PortfolioInvestmentAction {
+  investmentId: string;
+  timestamp: Date;
+  coinId: string;
+  amountCashInUsd: number;
+}
+
+export interface Portfolio {
+  budget: number;
+  investments: Array<PortfolioInvestmentAction>;
+}
+
 export interface User {
   email: string;
   password: string;
   actions: Array<ConcreteAction>;
   leaguesCreated?: any;
   leaguesJoined?: any;
-  portfolio?: any;
+  portfolio: Portfolio;
   settings?: any;
   lastLogin?: Date;
 }
