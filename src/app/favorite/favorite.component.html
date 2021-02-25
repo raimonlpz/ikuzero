@@ -68,7 +68,7 @@
     </h3>
     <tui-island *ngFor="let a of actions" [hoverable]="true" (click)="exploreCertainCoin(a.coinId)">
         <div class="action-date tui-text_body-xs" style="color: var(--tui-link);">{{a.timestamp | date: 'MMM d, y, h:mm:ss a' }}</div>
-        <span class="action-status tui-text_body-s" [style]="addStyleBg(a.action)">{{buildActionStatus(a.action, a.coinId)}} 	<tui-avatar style="display:inline-block" class="tui-space_top-1" size="s" [rounded]="true" [avatarUrl]="a.coinImg"></tui-avatar></span>
+        <span class="action-status tui-text_body-s" [style]="addStyleBg(a.action)">{{buildActionStatus(a.action, a.coinId, a.moneyMovedIn)}} 	<tui-avatar style="display:inline-block" class="tui-space_top-1" size="s" [rounded]="true" [avatarUrl]="a.coinImg"></tui-avatar></span>
 
         <button
 	        tuiIconButton

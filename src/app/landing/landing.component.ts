@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 // class User {
 //   constructor(readonly email: string, readonly password: string) {}
@@ -33,6 +34,9 @@ export class LandingComponent implements OnInit, OnDestroy {
   activeItemIndex = 0;
   coins: Array<any>;
   intervalSub: any;
+
+  changeDarkMode$: Subscription;
+  isDarkMode = true;
 
   flashCoins: FlashCoins;
 
@@ -71,6 +75,10 @@ export class LandingComponent implements OnInit, OnDestroy {
       }, 850);
 
     });
+
+    this.changeDarkMode$ = this.authService.changeMode.subscribe(is => {
+      this.isDarkMode = is;
+    });
   }
 
   setFlashCoins(coin: {symbol: string, price_change_percentage_24h: number} ): void {
@@ -94,5 +102,6 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     window.clearInterval(this.intervalSub);
+    this.changeDarkMode$.unsubscribe();
   }
 }

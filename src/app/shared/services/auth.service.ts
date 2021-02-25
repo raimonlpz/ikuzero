@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import {
   ConcreteAction,
   Portfolio,
@@ -15,11 +15,22 @@ export class AuthService {
   private isAuthenticated = false;
   private user: User;
 
+  changeMode = new BehaviorSubject<boolean>(
+    JSON.parse(window.localStorage.getItem('userThemePreferences')) ?
+    JSON.parse(window.localStorage.getItem('userThemePreferences')) :
+    false
+  );
+
   changeOnAuth = new Subject<boolean>();
   userActions = new Subject<Array<ConcreteAction>>();
   // portfolioMovements = new Subject<Array<PortfolioInvestmentAction>>();
 
-  constructor() { }
+  constructor() {}
+
+  changeDarkMode(): void {
+    this.changeMode.next(!this.changeMode.getValue());
+    window.localStorage.setItem('userThemePreferences', JSON.stringify(this.changeMode.getValue()));
+  }
 
   createUser(): void {
     this.user = {
@@ -41,7 +52,7 @@ export class AuthService {
     return this.user.portfolio;
   }
 
-  registerPortfolioUserAction(coinId: string, amountCash: number): void {
+  registerPortfolioUserAction(coinId: string, amountCash: number, coinImg: string): void {
     if (this.user.portfolio.budget >= amountCash) {
       this.user.portfolio.investments.push({
         investmentId: String(new Date().valueOf()),
@@ -50,13 +61,26 @@ export class AuthService {
         amountCashInUsd: amountCash
       });
       this.user.portfolio.budget -= amountCash;
+
+      this.addActionToUser({
+        id:  String(new Date().valueOf()),
+        coinId,
+        coinImg,
+        timestamp: new Date(),
+        action: UserAction.MoneyMove,
+        moneyMovedIn: amountCash
+      });
     }
   }
 
   addActionToUser(UAction: ConcreteAction): void {
     let actionIsRepeated = false;
     this.user.actions.forEach(a => {
-      if (a.coinId === UAction.coinId && a.action === UAction.action && a.action !== UserAction.Seen) {
+      if (a.coinId === UAction.coinId &&
+          a.action === UAction.action &&
+          a.action !== UserAction.Seen &&
+          a.action !== UserAction.MoneyMove
+      ) {
         actionIsRepeated = true;
       }
     });

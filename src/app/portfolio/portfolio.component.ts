@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Portfolio } from '../shared/interfaces';
 import { AuthService } from '../shared/services/auth.service';
 import { CoingeckoService } from '../shared/services/coingecko.service';
 import { FormControl } from '@angular/forms';
 import { TUI_DEFAULT_STRINGIFY } from '@taiga-ui/cdk';
+import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class PortfolioComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private coingeckoService: CoingeckoService
+    private coingeckoService: CoingeckoService,
+    @Inject(TuiNotificationsService) private readonly notificationsService: TuiNotificationsService,
   ) { }
 
   ngOnInit(): void {
@@ -56,12 +58,17 @@ export class PortfolioComponent implements OnInit {
 
   pushMoneyToPortfolio(): void {
     if (this.cashValue.value > 0 ){
-      this.authService.registerPortfolioUserAction(this.coinValue, this.cashValue.value);
+      const coinImgForNotificationsInActivity = this.items$.filter((it: any) => it.id === this.coinValue)[0]?.image;
+      this.authService.registerPortfolioUserAction(this.coinValue, this.cashValue.value, coinImgForNotificationsInActivity);
 
       this.coinsInvestedInForChart = new Set(this.portfolio.investments.map(inv => inv.coinId));
       this.fillMultiLineChartWithInvestmentsAndCoinsResume();
 
       this.coinChecked[this.coinValue] = true;
+
+      this.notificationsService.show(`You've moved ${this.cashValue.value}$ to ${this.coinValue.toUpperCase()}! 💸`, {
+        label: 'Main Activity:', status: TuiNotification.Success
+      }).subscribe();
     }
   }
 

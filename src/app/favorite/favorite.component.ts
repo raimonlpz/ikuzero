@@ -45,8 +45,8 @@ export class FavoriteComponent implements OnInit, OnDestroy {
     this.favCoinsDashboardIsLoading = false;
   }
 
-  buildActionStatus(actionId: UserAction, coinId: string): string {
-    switch (actionId) {
+  buildActionStatus(action: UserAction, coinId: string, moneyMoved?: number): string {
+    switch (action) {
       case UserAction.Like:
         return `👍 You've liked ${coinId.toUpperCase()}`;
       case UserAction.Dislike:
@@ -55,6 +55,8 @@ export class FavoriteComponent implements OnInit, OnDestroy {
         return `⭐ You've added to favs ${coinId.toUpperCase()} `;
       case UserAction.Seen:
         return `👀 You've seen ${coinId.toUpperCase()} in detail`;
+      case UserAction.MoneyMove:
+        return `💸 You've moved ${moneyMoved}$ to ${coinId.toUpperCase()}`;
       default:
         return '';
     }
@@ -70,6 +72,8 @@ export class FavoriteComponent implements OnInit, OnDestroy {
         return `background-color: var(--tui-warning-fill)`;
       case UserAction.Seen:
         return `background-color: var(--tui-info-fill)`;
+      case UserAction.MoneyMove:
+        return 'background-color: var(--tui-neutral-fill-night)';
       default:
         return '';
     }

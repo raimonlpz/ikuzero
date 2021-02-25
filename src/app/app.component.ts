@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuthenticated: boolean;
   authSub$: Subscription;
 
+  darkModeSub$: Subscription;
   darkModeToggling: boolean;
 
   newUser: User;
@@ -22,11 +23,13 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private coingeckoService: CoingeckoService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.darkModeToggling = true;
+
+    this.darkModeSub$ = this.authService.changeMode.subscribe(is => {
+      this.darkModeToggling = is;
+    });
 
     this.coinSelected = 'ethereum';
     this.onCoinSelected(this.coinSelected);
-    // this.isAuthenticated = this.authService.isAuth;
     this.isAuthenticated = true;
 
     this.authSub$ = this.authService.changeOnAuth.subscribe(is => {
@@ -34,7 +37,6 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.authService.createUser();
-    // console.log(this.authService.userLogged);
   }
 
   onCoinSelected(coin: string): void {
@@ -42,7 +44,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.coingeckoService.fetchDetailCoinData(this.coinSelected);
   }
 
+  toggleModeGlobally(): void {
+    this.authService.changeDarkMode();
+  }
+
   ngOnDestroy(): void {
     this.authSub$.unsubscribe();
+    this.darkModeSub$.unsubscribe();
   }
 }

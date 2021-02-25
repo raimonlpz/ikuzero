@@ -1,4 +1,4 @@
-export enum UserAction { Like, Dislike, Fav, Seen }
+export enum UserAction { Like, Dislike, Fav, Seen, MoneyMove }
 
 export interface ConcreteAction {
   id: string;
@@ -6,6 +6,7 @@ export interface ConcreteAction {
   coinImg: string;
   action: UserAction;
   timestamp: Date;
+  moneyMovedIn?: number;
 }
 
 export interface PortfolioInvestmentAction {
