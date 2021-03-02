@@ -62,6 +62,8 @@ export class ExploreComponent implements OnInit, OnDestroy {
           timestamp: new Date(),
           action: UserAction.Seen
         });
+
+        console.log(this.coinData);
       }
     });
 

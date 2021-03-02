@@ -48,6 +48,9 @@ export interface CoinData {
     en: {}
   };
   coingecko_rank: number;
+  coingecko_score: number;
+  community_score: number;
+
 }
 
 export interface OverallMarketStats {

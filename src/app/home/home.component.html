@@ -20,9 +20,6 @@
   <table class="tui-table home-table">
     <tbody>
         <tr class="tui-table__tr">
-            <!-- <th class="tui-table__th">
-                <tui-checkbox [formControl]="testValue"></tui-checkbox>
-            </th> -->
             <th class="tui-table__th">#</th>
             <th class="tui-table__th">Coin</th>
             <th class="tui-table__th">Symbol</th>
@@ -33,6 +30,7 @@
             <th class="tui-table__th">24h Volume</th>
             <th class="tui-table__th">Mkt Cap</th>
             <th class="tui-table__th">Last 7 Days</th>
+            <th class="tui-table__th">Actions</th>
         </tr>
         <tr class="tui-table__tr" *ngFor="let c of coins; let i = index">
               <td class="tui-table__td row-el" style="font-size: .85rem" (click)="exploreCertainCoin(c.id)">{{c.market_cap_rank ? c.market_cap_rank  : '-'}}</td>
@@ -59,6 +57,31 @@
                       [value]="getValueArrayForSparkline(c.sparkline_in_7d.price)"
                   ></tui-line-chart>
               </tui-axes>
+              </td>
+              <td class="tui-table__td row-el" style="display:flex;height:min-content;margin:0;padding:0;">
+
+                  <tui-marker-icon
+                  mode="error"
+                  style="padding: 0; margin:0;margin-right:.3rem;cursor: pointer;"
+                  size="xs"
+                  src="tuiIconDislikeLarge"
+                  (click)="onCoinSelectedForAction(c.id, 'dislike', c.image)"
+                  ></tui-marker-icon>
+                  <tui-marker-icon
+                    mode="success"
+                    style="padding: 0; margin:0;cursor: pointer;margin-right:.3rem;"
+                    size="xs"
+                    src="tuiIconLikeLarge"
+                    (click)="onCoinSelectedForAction(c.id, 'like', c.image)"
+                  ></tui-marker-icon>
+                  <tui-marker-icon
+                    mode="warning"
+                    style="padding: 0; margin:0;cursor: pointer;"
+                    size="xs"
+                    src="tuiIconStarLarge"
+                    (click)="onCoinSelectedForAction(c.id, 'fav', c.image)"
+                  ></tui-marker-icon>
+
               </td>
         </tr>
     </tbody>

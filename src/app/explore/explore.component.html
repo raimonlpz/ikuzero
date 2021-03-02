@@ -31,18 +31,38 @@
       [inheritColor]="true"
       [overlay]="true"
     >
-      <div class="tui-row tui-space_top-5 logo">
-        <div><tui-avatar class="tui-space_top-1 coin-logo" size="l" [avatarUrl]="coinData?.image?.large"></tui-avatar></div>
-        <h1 class="tui-text_body-xl">{{coinData?.name}}</h1>
-        <div class="rank" *ngIf="coinData">
-          <tui-tag
-            class="tag"
-            [hoverable]="true"
-            status="primary"
-            [value]="'Market Cap Rank  #' + coinData.coingecko_rank"
-	        ></tui-tag>
-        </div>
+    <div class="tui-row tui-space_top-5 logo">
+      <div><tui-avatar class="tui-space_top-1 coin-logo" size="l" [avatarUrl]="coinData?.image?.large"></tui-avatar></div>
+      <h1 class="tui-text_body-xl">{{coinData?.name}}</h1>
+      <div class="rank" *ngIf="coinData">
+        <tui-tag
+          class="tag"
+          [hoverable]="true"
+          status="primary"
+          [value]="'Market Cap Rank  #' + coinData.coingecko_rank"
+        ></tui-tag>
       </div>
+    </div>
+      <!-- <div class="tui-space_top-5 logo" style="display:flex; flex-direction:row; width:100%;">
+        <tui-island style="width: 50%; height:100%; justify-content: center; text-align:center;" [hoverable]="true">
+          <tui-avatar class="tui-space_top-1 coin-logo" style="margin-left:50%;transform:translateX(-50%)" size="l" [avatarUrl]="coinData?.image?.large"></tui-avatar>
+          <h1 class="tui-text_body-xl">{{coinData?.name}}</h1>
+          <div class="rank" *ngIf="coinData">
+            <tui-tag
+              class="tag"
+              [hoverable]="true"
+              status="primary"
+              [value]="'Market Cap Rank  #' + coinData.coingecko_rank"
+            ></tui-tag>
+          </div>
+          <ul class="tui-list" style="display:flex;">
+            <li class="tui-list-item"><tui-island [hoverable]="true" style="width:max-content;height: 30px; padding:0;padding-right:.2rem;padding-left:.2rem;"><h5>General Score: <span style="color:var(--tui-link);font-weight:bold;display:block;">{{coinData?.coingecko_score}}</span></h5></tui-island></li>
+            <li class="tui-list-item"><tui-island [hoverable]="true" style="width:max-content;height: 30px;padding:0;padding-right:.2rem;padding-left:.2rem;"><h5>Community Score: <span style="color:var(--tui-link); font-weight:bold;display:block;">{{coinData?.community_score}}</span></h5></tui-island></li>
+            <li class="tui-list-item"><tui-island [hoverable]="true" style="width:max-content;height: 30px; padding:0;padding-right:.2rem;padding-left:.2rem;"><h5>Reddit Posts (48h): <span style="color:var(--tui-link); font-weight:bold;display:block;">{{coinData?.community_score}}</span></h5></tui-island></li>
+          </ul>
+        </tui-island>
+
+      </div> -->
       <tui-axes class="axes" [verticalLines]="7" [horizontalLines]="6" *ngIf="value && yHeight">
         <tui-line-chart
             [x]="0"

@@ -60,13 +60,11 @@ export class SidebarComponent implements OnInit {
       this.lastValue = this.value;
       this.pagination = 1;
     }
-    // this.loading = true;
 
     this.coingeckoService.fetchSidebarCryptoData(value, this.pagination).subscribe(r => {
       if (currencyChange) {
         this.res = [];
       }
-      // this.loading = false;
       this.res = [...this.res, ...r];
     });
   }

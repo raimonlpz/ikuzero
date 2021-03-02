@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TUI_DEFAULT_STRINGIFY } from '@taiga-ui/cdk';
 import { CoingeckoService } from '../shared/services/coingecko.service';
 import { OverallMarketStats } from '../shared/interfaces';
+import { AuthService } from '../shared/services/auth.service';
+import { TuiNotification, TuiNotificationsService } from '@taiga-ui/core';
+import { UserAction } from '../shared/interfaces';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +27,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private coingeckoService: CoingeckoService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService,
+    @Inject(TuiNotificationsService) private readonly notificationsService: TuiNotificationsService,
     ) { }
 
   ngOnInit(): void {
@@ -77,7 +82,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
   goToPage(index: number): void {
     this.index = index;
     this.fetchTableCryptoData();
@@ -86,5 +90,46 @@ export class HomeComponent implements OnInit {
   exploreCertainCoin(coinId: string): void {
     this.coingeckoService.fetchDetailCoinData(coinId);
     this.router.navigate(['/explore']);
+  }
+
+  onCoinSelectedForAction(coinId: string, action: string, img: string): void {
+    switch (action) {
+      case 'dislike':
+        this.auth.addActionToUser({
+          id:  String(new Date().valueOf()),
+          coinImg: img,
+          coinId,
+          timestamp: new Date(),
+          action: UserAction.Dislike
+        });
+        this.notificationsService.show(`You've disliked ${coinId.toUpperCase()}! 👎`, {
+          label: 'Main Activity:', status: TuiNotification.Error
+        }).subscribe();
+        break;
+      case 'like':
+        this.auth.addActionToUser({
+          id:  String(new Date().valueOf()),
+          coinId,
+          coinImg: img,
+          timestamp: new Date(),
+          action: UserAction.Like
+        });
+        this.notificationsService.show(`You've liked ${coinId.toUpperCase()}! 👍`, {
+          label: 'Main Activity:', status: TuiNotification.Success
+        }).subscribe();
+        break;
+      case 'fav':
+        this.auth.addActionToUser({
+          id:  String(new Date().valueOf()),
+          coinId,
+          coinImg: img,
+          timestamp: new Date(),
+          action: UserAction.Fav
+        });
+        this.notificationsService.show(`You've added to favs ${coinId.toUpperCase()}! ⭐`, {
+          label: 'Main Activity:', status: TuiNotification.Warning
+        }).subscribe();
+        break;
+    }
   }
 }
